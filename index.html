@@ -1,1226 +1,178 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#000000" />
-  <title>DE Watch 8 Classic — Teorie &amp; 86 Probleme</title>
-  <style>
-    /* ============================================================
-       DESIGN TOKENS — AMOLED PURE BLACK (GALAXY WATCH 8 CLASSIC)
-       ============================================================ */
-    :root {
-      --bg: #000000;
-      --card: #111318;
-      --border: #242933;
-      --text: #F4F6F9;
-      --muted: #9BA3B0;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>DE · Ghid compact</title>
+<style>
+:root{--fs:15px;--bg:#000;--card:#101318;--line:#242a36;--tx:#eef1f5;--mu:#9aa4b2;--ac:#4cc3ff;--ok:#3ddc97;--wn:#ffc145}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--tx);font:var(--fs)/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+#scr{height:100%;overflow-y:auto;overflow-x:hidden;padding:42px 22px 80px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#scr::-webkit-scrollbar{display:none}
+.wrap{max-width:640px;margin:0 auto}
 
-      --cyan: #38BDF8;
-      --cyan-bg: rgba(56, 189, 248, 0.16);
-      --green: #34D399;
-      --green-bg: rgba(52, 211, 153, 0.16);
-      --amber: #FBBF24;
-      --amber-bg: rgba(251, 191, 36, 0.16);
-      --rose: #FB7185;
-      --rose-bg: rgba(251, 113, 133, 0.16);
+/* antet */
+.top{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:8px}
+.top b{font-size:.78em;letter-spacing:.12em;color:var(--mu)}
+.fb{width:34px;height:28px;border-radius:14px;border:1px solid var(--line);background:var(--card);font-size:.75em;font-weight:700}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:330px;margin:0 auto 8px}
+.tabs button{padding:8px 2px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--mu);font-size:.8em;font-weight:700}
+.tabs button.on{border-color:var(--ac);color:var(--ac);background:rgba(76,195,255,.12)}
+.srch{position:relative;max-width:300px;margin:0 auto 10px}
+.srch input{width:100%;padding:7px 32px 7px 12px;border-radius:999px;border:1px solid var(--line);background:#0a0c10;color:var(--tx);font:inherit;font-size:.82em;outline:none}
+.srch input:focus{border-color:var(--ac)}
+.srch button{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:0;background:#262c38;display:none;font-size:.8em}
+.srch.has button{display:block}
 
-      --fs: 13px;
-    }
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin:0 auto 10px;max-width:360px}
+.pills button{padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--mu);font-size:.75em;font-weight:600}
+.pills button.on{background:var(--ac);border-color:var(--ac);color:#000}
 
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+.panel,.sub,#res{display:none}.panel.on,.sub.on,#res.on{display:block}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: #000000;
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      font-size: var(--fs);
-      line-height: 1.38;
-      overflow: hidden;
-    }
+/* carduri */
+.pb .no{background:rgba(76,195,255,.14)}
+.card,.pb{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px}
+.card{padding:10px 12px}
+h3{margin:0 0 4px;font-size:1em;color:var(--ac);line-height:1.3}
+p{margin:5px 0}
+b{color:#fff}
+sub,sup{font-size:.7em;line-height:0}
+.f{background:#07090c;border-left:3px solid var(--ac);border-radius:8px;padding:6px 9px;margin:6px 0;overflow-x:auto;font-size:.97em}
+.r{color:var(--ok);border-left:3px solid var(--ok);padding-left:8px}
+.r::before{content:"→ ";font-weight:700}
+.w{color:var(--wn);border-left:3px solid var(--wn);padding-left:8px}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.88em;margin:0 2px;line-height:1.2}
+.fr>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+.sq{border-top:1px solid currentColor;padding-top:1px}
+.tw{overflow-x:auto;margin-top:4px}
+.g{display:inline-block;width:1.1em}
+table{width:100%;border-collapse:collapse;font-size:.84em}
+th,td{border:1px solid var(--line);padding:4px 5px;text-align:left;vertical-align:top}
+th{background:#171b24;color:var(--ac)}
 
-    /* ============================================================
-       LAYOUT CEAS ROTUND (450x450 PE DESKTOP) + MOD COMPLET
-       ============================================================ */
-    .stage {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000000;
-    }
+/* probleme pliabile */
+.pb summary{list-style:none;display:grid;grid-template-columns:auto 1fr;column-gap:8px;padding:9px 11px;cursor:pointer}
+.pb summary::-webkit-details-marker{display:none}
+.no{grid-row:span 2;align-self:start;font-size:.72em;font-weight:800;padding:2px 6px;border-radius:6px;background:rgba(76,195,255,.14);color:var(--ac);margin-top:2px}
+.no.wn{background:rgba(255,193,69,.16);color:var(--wn)}
+.tt{font-weight:700;line-height:1.3}
+.wi{color:var(--wn)}
+.an{font-size:.84em;color:var(--ok);margin-top:2px}
+.pb[open]{border-color:#34507a}
+.pb[open] summary{border-bottom:1px solid var(--line)}
+.bd{padding:6px 12px 10px}
+.meta{text-align:center;color:var(--mu);font-size:.78em;margin-bottom:8px}
 
-    .mode-btn {
-      display: none;
-    }
+#up{position:fixed;left:50%;bottom:14px;transform:translate(-50%,70px);width:40px;height:40px;border-radius:50%;border:1px solid var(--ac);background:rgba(16,19,24,.95);color:var(--ac);font-size:1.1em;font-weight:800;transition:transform .2s,opacity .2s;z-index:5;opacity:0;pointer-events:none}
+#up.on{transform:translate(-50%,0);opacity:1;pointer-events:auto}
 
-    .watch-shell {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: #000000;
-      overflow: hidden;
-    }
-
-    .watch-screen {
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding: 46px 14px 70px 14px;
-      scrollbar-width: none;
-    }
-
-    .watch-screen::-webkit-scrollbar {
-      display: none;
-    }
-
-    @media (min-width: 521px) {
-      .mode-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        position: fixed;
-        top: 14px;
-        right: 16px;
-        z-index: 50;
-        padding: 7px 14px;
-        border-radius: 999px;
-        border: 1px solid #303746;
-        background: #141821;
-        color: var(--text);
-        font-size: 12px;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .mode-btn:hover {
-        border-color: var(--cyan);
-        color: var(--cyan);
-      }
-
-      body:not(.full-mode) .stage {
-        background: radial-gradient(circle at center, #111622 0%, #040507 75%);
-      }
-
-      body:not(.full-mode) .watch-shell {
-        width: 450px;
-        height: 450px;
-        border-radius: 50%;
-        border: 12px solid #20242d;
-        box-shadow:
-          0 0 0 2px #394050,
-          0 0 0 6px #0c0e13,
-          0 24px 64px rgba(0, 0, 0, 0.9),
-          inset 0 0 0 1px #2f3645;
-      }
-
-      body.full-mode .watch-shell {
-        width: 100%;
-        max-width: 760px;
-        height: 100%;
-        border-left: 1px solid var(--border);
-        border-right: 1px solid var(--border);
-      }
-
-      body.full-mode .watch-screen {
-        padding: 22px 20px 76px 20px;
-      }
-    }
-
-    /* ============================================================
-       HEADER, FONT CONTROLS, 3 MAIN TABS & SUB-PILLS
-       ============================================================ */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: 0 auto 8px auto;
-      max-width: 240px;
-    }
-
-    .brand {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .f-btn {
-      min-width: 30px;
-      height: 26px;
-      padding: 0 7px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      font-size: 11px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .f-btn:active {
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-
-    .main-tabs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      max-width: 350px;
-      margin: 0 auto 8px auto;
-    }
-
-    .tab-btn {
-      padding: 9px 4px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 800;
-      cursor: pointer;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .tab-btn.active-t {
-      background: var(--cyan-bg);
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-
-    .tab-btn.active-d {
-      background: var(--green-bg);
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .tab-btn.active-q {
-      background: var(--amber-bg);
-      border-color: var(--amber);
-      color: var(--amber);
-    }
-
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
-      margin: 0 auto 12px auto;
-      max-width: 390px;
-    }
-
-    .pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .pill.on-c { background: var(--cyan); border-color: var(--cyan); color: #000; }
-    .pill.on-g { background: var(--green); border-color: var(--green); color: #000; }
-    .pill.on-a { background: var(--amber); border-color: var(--amber); color: #000; }
-
-    /* ============================================================
-       PANELS & ULTRA-CONCISE CARDS
-       ============================================================ */
-    .panel { display: none; }
-    .panel.active { display: block; }
-
-    .sub { display: none; }
-    .sub.active { display: block; }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 8px 10px;
-      margin-bottom: 7px;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .card-hd {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .bdg {
-      flex-shrink: 0;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 6px;
-      letter-spacing: 0.02em;
-    }
-
-    .b-c { background: var(--cyan-bg); color: var(--cyan); border: 1px solid rgba(56,189,248,0.35); }
-    .b-g { background: var(--green-bg); color: var(--green); border: 1px solid rgba(52,211,153,0.35); }
-    .b-a { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(251,191,36,0.35); }
-    .b-r { background: var(--rose-bg); color: var(--rose); border: 1px solid rgba(251,113,133,0.4); }
-
-    .ttl {
-      font-size: 0.98em;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.25;
-    }
-
-    .ln {
-      margin: 2px 0;
-      color: var(--text);
-    }
-
-    .tag {
-      font-weight: 800;
-      margin-right: 3px;
-    }
-
-    .t-f { color: var(--cyan); }
-    .t-cc { color: var(--green); }
-    .t-ca { color: var(--amber); }
-    .t-r { color: #ffffff; }
-    .t-w { color: var(--rose); }
-
-    .fm {
-      display: block;
-      background: #08090c;
-      border: 1px solid #202531;
-      border-radius: 8px;
-      padding: 5px 7px;
-      margin: 4px 0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.9em;
-      color: #e2e8f0;
-      overflow-wrap: anywhere;
-      line-height: 1.42;
-    }
-
-    .m {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.92em;
-    }
-
-    sub, sup {
-      font-size: 0.72em;
-      line-height: 0;
-    }
-
-    /* Tabele ultra-compacte */
-    table.tbl {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 4px;
-      font-size: 0.86em;
-      table-layout: fixed;
-    }
-
-    table.tbl th,
-    table.tbl td {
-      border: 1px solid #252b38;
-      padding: 4px 5px;
-      text-align: left;
-      vertical-align: top;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    table.tbl th {
-      background: #171b24;
-      color: var(--cyan);
-      font-weight: 800;
-    }
-
-    table.tbl.ta th { color: var(--amber); }
-
-    /* ============================================================
-       FLOATING SCROLL-TO-TOP BUTTON
-       ============================================================ */
-    .fab-top {
-      position: absolute;
-      left: 50%;
-      bottom: 12px;
-      transform: translateX(-50%) translateY(60px);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--cyan);
-      background: rgba(17, 19, 24, 0.94);
-      color: var(--cyan);
-      font-size: 16px;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.18s ease, opacity 0.18s ease;
-      z-index: 20;
-    }
-
-    .fab-top.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-  </style>
+/* previzualizare pe desktop: ceas rotund 450 px */
+#mode{display:none}
+@media (min-width:600px){
+ #mode{display:block;position:fixed;top:12px;right:14px;z-index:9;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:12px}
+ body:not(.full) #scr{width:450px;height:450px;margin:calc(50vh - 225px) auto 0;border-radius:50%;border:10px solid #1d222b;box-shadow:0 0 0 2px #3a4252,0 20px 60px #000;padding:46px 26px 80px}
+ body:not(.full) #up{bottom:calc(50vh - 215px)}
+}
+</style>
 </head>
 <body>
-  <button id="modeBtn" class="mode-btn" type="button">Mod Complet</button>
-
-  <div class="stage">
-    <div class="watch-shell">
-      <main id="screen" class="watch-screen" tabindex="0">
-
-        <!-- Header compact în safe-area superioară -->
-        <div class="top-bar">
-          <button id="fsDown" class="f-btn" type="button" aria-label="Font mai mic">A-</button>
-          <span class="brand">DE • WATCH 8</span>
-          <button id="fsUp" class="f-btn" type="button" aria-label="Font mai mare">A+</button>
-        </div>
-
-        <!-- 3 Tab-uri principale -->
-        <nav class="main-tabs" aria-label="Tab-uri principale">
-          <button class="tab-btn active-t" data-tab="teorie" type="button">1. TEORIE</button>
-          <button class="tab-btn" data-tab="diode" type="button">2. DIODE</button>
-          <button class="tab-btn" data-tab="tec" type="button">3. TEC</button>
-        </nav>
-
-        <!-- ========================================================
-             TAB 1: 1. TEORIE (ACTIV IMPLICIT)
-             ======================================================== -->
-        <section id="panel-teorie" class="panel active">
-          <div class="pills" data-pillgroup="teorie">
-            <button class="pill on-c" data-sub="t-def" type="button">Definiții</button>
-            <button class="pill" data-sub="t-cmp" type="button">Comparații</button>
-            <button class="pill" data-sub="t-calc" type="button">Calcul P1-17</button>
-          </div>
-
-          <!-- 1.1 DEFINIȚII -->
-          <div id="sub-t-def" class="sub active">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">Si</span><span class="ttl">Constante Si (300 K)</span></div>
-              <div class="fm">n<sub>i</sub>=1,5·10<sup>10</sup> cm<sup>−3</sup> | E<sub>G</sub>=1,12 eV | kT=0,0259 eV<br>N<sub>C</sub>=2,8·10<sup>19</sup> | N<sub>V</sub>=1,04·10<sup>19</sup> cm<sup>−3</sup><br>V<sub>th</sub>=25 mV | m=2 ⇒ mV<sub>th</sub>=50 mV</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Tipuri Semiconductoare</span></div>
-              <div class="ln"><span class="tag t-r">Intrinsec:</span> n = p = n<sub>i</sub>. Lege mase: <span class="m">n·p = n<sub>i</sub><sup>2</sup></span>.</div>
-              <div class="ln"><span class="tag t-r">Tip n (donori):</span> n &approx; N<sub>D</sub>, p = n<sub>i</sub><sup>2</sup>/N<sub>D</sub>.</div>
-              <div class="ln"><span class="tag t-r">Tip p (acceptori):</span> p &approx; N<sub>A</sub>, n = n<sub>i</sub><sup>2</sup>/N<sub>A</sub>.</div>
-              <div class="ln"><span class="tag t-r">Compensat:</span> N<sub>A</sub> și N<sub>D</sub> simultan; dacă N<sub>A</sub>=N<sub>D</sub> ⇒ n=p=n<sub>i</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Curenți, Echilibru &amp; Mobilitate</span></div>
-              <div class="ln"><span class="tag t-r">Echilibru termic:</span> J<sub>tot</sub> = 0.</div>
-              <div class="ln"><span class="tag t-f">F:</span> Drift: <span class="m">J = &sigma;E = (q&mu;<sub>n</sub>n + q&mu;<sub>p</sub>p)E</span>.</div>
-              <div class="ln"><span class="tag t-r">Difuzie:</span> doar la gradient concentrație (dopare neuniformă).</div>
-              <div class="ln"><span class="tag t-r">&mu;:</span> scade cu T și cu concentrația de impurități.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">RSS / Zona de barieră</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Difuzia majoritarilor la joncțiune lasă ioni ficși (sarcină spațială), fără purtători mobili („zonă golită”). Creează câmp intern și barieră &Phi;<sub>0</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Joncțiune asimetrică (p<sup>+</sup>n)</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Zona golită se extinde preponderent în regiunea mai SLAB dopată (<span class="m">x<sub>p</sub>N<sub>A</sub> = x<sub>n</sub>N<sub>D</sub></span>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Polarizare directă vs inversă</span></div>
-              <div class="ln"><span class="tag t-cc">Direct (V<sub>A</sub>&gt;0):</span> bariera scade (&Phi;<sub>0</sub>−V<sub>A</sub>) ⇒ curent mare de difuzie (exponențial).</div>
-              <div class="ln"><span class="tag t-w">Invers (V<sub>A</sub>&lt;0):</span> bariera crește ⇒ curent foarte mic −I<sub>0</sub> (doar minoritari generați termic).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Capacități diodă &amp; r<sub>s</sub></span></div>
-              <div class="ln"><span class="tag t-r">Invers:</span> C<sub>j</sub> (barieră/tranziție), scade cu |V<sub>D</sub>|.</div>
-              <div class="ln"><span class="tag t-r">Direct:</span> C<sub>d</sub> (difuzie), &prop; I<sub>D</sub>. Contează la IF!</div>
-              <div class="ln"><span class="tag t-r">r<sub>s</sub>:</span> regiuni neutre + contacte; contează la curenți mari.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Varicap, Zener &amp; LED</span></div>
-              <div class="ln"><span class="tag t-r">Varicap:</span> polarizată INVERS; condensator variabil în tensiune (C<sub>j</sub>).</div>
-              <div class="ln"><span class="tag t-r">Zener:</span> INVERS în străpungere (I<sub>Z</sub>&ge;I<sub>Z,min</sub>) ⇒ V=V<sub>Z</sub>. Echiv: V<sub>Z</sub> serie R<sub>Z</sub> (R<sub>Z</sub>=0 ⇒ scurt c.a.).</div>
-              <div class="ln"><span class="tag t-r">LED:</span> DIRECT; recombinarea e<sup>−</sup>–gol emite fotoni.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Efectul temperaturii (T)</span></div>
-              <div class="ln"><span class="tag t-r">V<sub>th</sub>=kT/q:</span> CREȘTE cu T.</div>
-              <div class="ln"><span class="tag t-r">TEC-J:</span> I<sub>DSS</sub>, g<sub>m</sub> SCAD cu T; r<sub>ds</sub> crește. Există PSF drift nul cu T (se compensează |V<sub>T</sub>| și &mu;).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">TEC-J: Denumire, Unipolar, Static</span></div>
-              <div class="ln"><span class="tag t-r">Denumire:</span> Tranzistor cu Efect de Câmp cu Joncțiune.</div>
-              <div class="ln"><span class="tag t-r">Unipolar:</span> conducție cu UN singur tip de purtători (majoritarii). Alte unipolare: TEC-MOS, Schottky.</div>
-              <div class="ln"><span class="tag t-r">Statici:</span> I<sub>DSS</sub> (I<sub>D</sub> la V<sub>GS</sub>=0, sat.) și V<sub>T</sub>/V<sub>P</sub> (prag închidere canal: gâtuire completă la |V<sub>GS</sub>|=|V<sub>T</sub>|).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Capacitor MOS (inversie puternică)</span></div>
-              <div class="ln"><span class="tag t-r">Condiție:</span> V<sub>GS</sub> &gt; V<sub>T</sub> (canal n).</div>
-              <div class="ln"><span class="tag t-r">Armătura − (substrat p):</span> electronii din stratul de inversie + ionii ficși negativi ai acceptorilor.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">T</span><span class="ttl">Electron vs Gol</span></div>
-              <div class="ln"><span class="tag t-cc">Asemănare:</span> sarcină egală în modul (q), participă la curent.</div>
-              <div class="ln"><span class="tag t-ca">Deosebire:</span> semn opus (− vs +), &mu;<sub>n</sub> &gt; &mu;<sub>p</sub> (~2,8× la Si).</div>
-            </div>
-          </div>
-
-          <!-- 1.2 COMPARAȚII -->
-          <div id="sub-t-cmp" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">CMP</span><span class="ttl">Diodă PN vs Schottky</span></div>
-              <table class="tbl">
-                <thead>
-                  <tr><th style="width:28%;">Criteriu</th><th style="width:36%;">PN Redresoare</th><th style="width:36%;">Schottky</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><b>Asemănări</b></td><td colspan="2">Redresoare, unidirecționale, au C<sub>j</sub></td></tr>
-                  <tr><td><b>Structură</b></td><td>pn (bipolară)</td><td>Metal–semi (unipolară, majoritari)</td></tr>
-                  <tr><td><b>V<sub>on</sub> / I<sub>0</sub></b></td><td>0,6–0,7 V / mic</td><td>~0,2 V / mai mare</td></tr>
-                  <tr><td><b>Comutație</b></td><td>Mai lentă (are C<sub>d</sub>)</td><td>Rapidă (fără C<sub>d</sub>)</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">CA</span><span class="ttl">Echivalare c.c. → c.a. (JF)</span></div>
-              <table class="tbl">
-                <thead>
-                  <tr><th style="width:34%;">Element</th><th style="width:31%;">În c.c.</th><th style="width:35%;">În c.a. (JF)</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Sursă U c.c.</td><td>Păstrată</td><td><b>Masă (scurt)</b></td></tr>
-                  <tr><td>Sursă I c.c.</td><td>Păstrată</td><td><b>Gol (întrerup.)</b></td></tr>
-                  <tr><td>C<sub>&infin;</sub></td><td>Gol</td><td><b>Scurt</b></td></tr>
-                  <tr><td>Diodă cond.</td><td>V<sub>D</sub></td><td>r<sub>d</sub> = 50mV/I<sub>D</sub></td></tr>
-                  <tr><td>Diodă bloc.</td><td>−I<sub>0</sub></td><td>Gol</td></tr>
-                  <tr><td>Zener străp.</td><td>V<sub>Z</sub></td><td>R<sub>Z</sub> (0 = <b>scurt</b>)</td></tr>
-                  <tr><td>Zener bloc.</td><td>−I<sub>0Z</sub></td><td>Gol</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">IF</span><span class="ttl">TEC-J: JF vs IF</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> La înaltă frecvență (IF) se adaugă capacitățile parazite <span class="m">C<sub>gs</sub></span> și <span class="m">C<sub>gd</sub></span>.</div>
-            </div>
-          </div>
-
-          <!-- 1.3 CALCUL P1-17 -->
-          <div id="sub-t-calc" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P1</span><span class="ttl">Si tip n — Nivel Fermi</span></div>
-              <div class="fm">n<sub>0</sub>=N<sub>D</sub> | p<sub>0</sub>=n<sub>i</sub><sup>2</sup>/N<sub>D</sub><br>E<sub>F</sub>−E<sub>i</sub>=kT·ln(n<sub>0</sub>/n<sub>i</sub>) | E<sub>C</sub>−E<sub>F</sub>=kT·ln(N<sub>C</sub>/n<sub>0</sub>)</div>
-              <div class="ln"><span class="tag t-w">⚠:</span> Degenerat dacă E<sub>C</sub>−E<sub>F</sub> &lt; 3kT (0,078 eV).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P2</span><span class="ttl">Compensat (N<sub>A</sub> &gt; N<sub>D</sub>)</span></div>
-              <div class="fm">Tip p: p<sub>0</sub>=N<sub>A</sub>−N<sub>D</sub> | n<sub>0</sub>=n<sub>i</sub><sup>2</sup>/p<sub>0</sub><br>E<sub>i</sub>−E<sub>F</sub>=kT·ln(p<sub>0</sub>/n<sub>i</sub>) | E<sub>F</sub>−E<sub>V</sub>=kT·ln(N<sub>V</sub>/p<sub>0</sub>)</div>
-              <div class="ln"><span class="tag t-w">⚠:</span> Degenerat dacă E<sub>F</sub>−E<sub>V</sub> &lt; 3kT.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P3</span><span class="ttl">Bară Si tip n (&rho;, L)</span></div>
-              <div class="fm">n<sub>0</sub>=1/(q&mu;<sub>n</sub>&rho;) ⇒ E<sub>F</sub> | Echil: J=0<br>Cu U=10V: J=(1/&rho;)·(U/L)</div>
-              <div class="ln"><span class="tag t-r">R:</span> Doar drift electroni (difuzie=0, goluri neglijabile).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P4</span><span class="ttl">Bară Si tip p (&rho;, L)</span></div>
-              <div class="fm">p<sub>0</sub>=1/(q&mu;<sub>p</sub>&rho;) ⇒ E<sub>i</sub>−E<sub>F</sub> | Echil: J=0<br>Cu U=20V: J=(1/&rho;)·(U/L)</div>
-              <div class="ln"><span class="tag t-r">R:</span> Doar drift goluri.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P5</span><span class="ttl">Tabel Zener (parametri)</span></div>
-              <div class="ln"><span class="tag t-r">1:</span> I mic constant (−20nA) ⇒ I<sub>0</sub>=20 nA.</div>
-              <div class="ln"><span class="tag t-r">2:</span> V constant (−9,1V), I mA ⇒ V<sub>Z</sub>=9,1V, R<sub>Z</sub>=0.</div>
-              <div class="ln"><span class="tag t-f">F:</span> Direct: V<sub>D</sub>=50mV·ln(I<sub>D</sub>/I<sub>0</sub>). La −5V: blocat, I=−I<sub>0</sub>, CA=gol.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P6</span><span class="ttl">Tabel Zener — Varianta B</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Identic P5: I<sub>0</sub>=15 nA, V<sub>Z</sub>=25 V.</div>
-              <div class="ln"><span class="tag t-r">Tabel:</span> −15 nA pt |V|&lt;25V; −25 V pt curenți mA.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P7</span><span class="ttl">Zone caracteristică din PSF</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> (+mA, +0,7V)=direct; (−nA, −V)=invers (⇒I<sub>0</sub>); (−mA, −V<sub>BR</sub>)=străpungere (⇒V<sub>BR</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P8</span><span class="ttl">Dioda Varicap</span></div>
-              <div class="fm">C<sub>j</sub> = C<sub>j0</sub> / (1 − V<sub>D</sub>/&Phi;<sub>0</sub>)<sup>m<sub>j</sub></sup></div>
-              <div class="ln"><span class="tag t-r">1:</span> Raport C<sub>1</sub>/C<sub>2</sub> ⇒ scoți m<sub>j</sub> cu ln (0,5=abruptă, 0,33=liniară).</div>
-              <div class="ln"><span class="tag t-r">2:</span> Afli C<sub>j0</sub>, apoi scoți V<sub>D</sub> pt 200 pF.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P9</span><span class="ttl">Curent TEC-J (sat/triodă/bloc)</span></div>
-              <div class="ln"><span class="tag t-r">Canal:</span> V<sub>T</sub>&lt;0⇒n; V<sub>T</sub>&gt;0⇒p. Blocat: |V<sub>GS</sub>|&ge;|V<sub>T</sub>| sau V<sub>DS</sub>=0.</div>
-              <div class="fm">Sat (|V<sub>DS</sub>|&ge;|V<sub>GS</sub>−V<sub>T</sub>|): I<sub>D</sub>=I<sub>DSS</sub>(1−V<sub>GS</sub>/V<sub>T</sub>)<sup>2</sup><br>Triodă: I<sub>D</sub>=I<sub>DSS</sub>[2(1−V<sub>GS</sub>/V<sub>T</sub>)(V<sub>DS</sub>/|V<sub>T</sub>|)−(V<sub>DS</sub>/V<sub>T</sub>)<sup>2</sup>]</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P10</span><span class="ttl">Panta maximă g<sub>m0</sub></span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Maximă la V<sub>GS</sub>=0 (I<sub>D</sub>=I<sub>DSS</sub>). Alt nume: transconductanță.</div>
-              <div class="fm">g<sub>m0</sub> = 2I<sub>DSS</sub>/|V<sub>T</sub>| ⇒ I<sub>DSS</sub> = g<sub>m0</sub>·|V<sub>T</sub>|/2</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P11</span><span class="ttl">PSF-uri posibile (P<sub>d</sub>, V<sub>BR</sub>)</span></div>
-              <div class="fm">Verifici: |V<sub>D</sub>| &le; V<sub>BR</sub> ȘI |I<sub>D</sub>·V<sub>D</sub>| &le; P<sub>d</sub></div>
-              <div class="ln"><span class="tag t-w">⚠:</span> Dacă pică oricare ⇒ dioda NU poate funcționa acolo!</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P12</span><span class="ttl">Test străpungere — Rolul R</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> R limitează curentul (protecție putere).</div>
-              <div class="fm">I<sub>max</sub>=P<sub>D,max</sub>/V<sub>BR</sub> ⇒ R &ge; (E − V<sub>BR</sub>)/I<sub>max</sub></div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P13</span><span class="ttl">Joncțiune pn abruptă</span></div>
-              <div class="fm">&Phi;<sub>0</sub>=V<sub>th</sub>·ln(N<sub>A</sub>N<sub>D</sub>/n<sub>i</sub><sup>2</sup>)<br>x<sub>d</sub>=&radic;[(2&epsilon;/q)(1/N<sub>A</sub>+1/N<sub>D</sub>)(&Phi;<sub>0</sub>−V<sub>A</sub>)]<br>x<sub>p</sub>/x<sub>n</sub>=N<sub>D</sub>/N<sub>A</sub> | E<sub>max</sub>=2(&Phi;<sub>0</sub>−V<sub>A</sub>)/x<sub>d</sub></div>
-              <div class="ln"><span class="tag t-r">R:</span> Direct⇒x<sub>d</sub> scade; Invers⇒x<sub>d</sub> crește.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-r">P14</span><span class="ttl">Nivel Fermi P4 (corectată)</span></div>
-              <div class="ln"><span class="tag t-w">⚠:</span> Exponenți 10<sup>+19</sup> (NU 10<sup>−19</sup>)!</div>
-              <div class="ln"><span class="tag t-r">R:</span> Tip p: p<sub>0</sub>=N<sub>A</sub>−N<sub>D</sub>=5·10<sup>18</sup>; E<sub>F</sub>−E<sub>V</sub>&approx;0,019 eV &lt; 3kT ⇒ <b>DEGENERAT</b>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P15</span><span class="ttl">Tabel parametri TEC-J</span></div>
-              <div class="ln"><span class="tag t-r">Canal:</span> V<sub>T</sub>&gt;0⇒p. I<sub>DSS</sub>=g<sub>m0</sub>|V<sub>T</sub>|/2. |V<sub>DS</sub>|<sub>min</sub>=|V<sub>T</sub>|.</div>
-              <div class="ln"><span class="tag t-r">R:</span> La g<sub>m0</sub>/2: V<sub>GS</sub>=V<sub>T</sub>/2, I<sub>D</sub>=I<sub>DSS</sub>/4, r<sub>ds</sub>×4. La 3V&gt;V<sub>T</sub>: blocat (0, 0, &infin;).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P16</span><span class="ttl">Amplificare intrinsecă TEC-J</span></div>
-              <div class="fm">g<sub>m</sub>=2&radic;(I<sub>DSS</sub>I<sub>D</sub>)/|V<sub>T</sub>| | r<sub>ds</sub>=1/(&lambda;I<sub>D</sub>)<br>Gol: v<sub>ds</sub>=g<sub>m</sub>r<sub>ds</sub>v<sub>gs</sub> (&mu;=g<sub>m</sub>r<sub>ds</sub>) | Scurt: i<sub>d</sub>=g<sub>m</sub>v<sub>gs</sub></div>
-              <div class="ln"><span class="tag t-r">R:</span> La 4·I<sub>D</sub> ⇒ g<sub>m</sub>×2, r<sub>ds</sub>/4.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-c">P17</span><span class="ttl">TEC-J ca rezistor (V<sub>GS</sub>=0)</span></div>
-              <div class="fm">Sat: I<sub>D</sub>=I<sub>DSS</sub>(1+&lambda;V<sub>DS</sub>) | R<sub>cc</sub>=V<sub>DS</sub>/I<sub>D</sub> | r<sub>ca</sub>=r<sub>ds</sub><br>Liniară (V<sub>DS</sub> mic): R &approx; |V<sub>T</sub>| / (2I<sub>DSS</sub>)</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ========================================================
-             TAB 2: 2. DIODE (P18–P50)
-             ======================================================== -->
-        <section id="panel-diode" class="panel">
-          <div class="pills" data-pillgroup="diode">
-            <button class="pill on-g" data-sub="d-reg" type="button">Reguli</button>
-            <button class="pill" data-sub="d-18" type="button">P18-28</button>
-            <button class="pill" data-sub="d-29" type="button">P29-39</button>
-            <button class="pill" data-sub="d-40" type="button">P40-50</button>
-          </div>
-
-          <!-- 2.1 REGULI -->
-          <div id="sub-d-reg" class="sub active">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">ALG</span><span class="ttl">Algoritm iterativ PSF (Shockley)</span></div>
-              <div class="ln"><span class="tag t-cc">1:</span> Presupui stări (D cond., Z străpuns) și V<sub>D</sub>=0.</div>
-              <div class="ln"><span class="tag t-cc">2:</span> TKII/TKI ⇒ afli I<sub>D</sub>.</div>
-              <div class="ln"><span class="tag t-cc">3:</span> V<sub>D</sub> = 50mV·ln(I<sub>D</sub>/I<sub>0</sub>) ⇒ reiei pas 2 până &Delta;V<sub>D</sub>&lt;1mV.</div>
-              <div class="ln"><span class="tag t-w">⚠:</span> Verifici: I<sub>D</sub>&gt;0, I<sub>Z</sub>&ge;I<sub>Z,min</sub>! Dacă cade, schimbi starea.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">F</span><span class="ttl">Formule rapide Diode</span></div>
-              <div class="fm">r<sub>d</sub> = 50 mV / I<sub>D</sub><br>Paralel: I<sub>1</sub>/I<sub>2</sub> = I<sub>01</sub>/I<sub>02</sub> | I<sub>0,tot</sub> = I<sub>01</sub> + I<sub>02</sub><br>Invers serie: impune I<sub>0</sub> cel mai MIC</div>
-            </div>
-          </div>
-
-          <!-- 2.2 P18–P28 -->
-          <div id="sub-d-18" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P18</span><span class="ttl">1 diodă serie — iterativ</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> I=(E−V<sub>D</sub>)/R, V<sub>D</sub>=50mV·ln(I/I<sub>0</sub>), iterativ (&Delta;&lt;1mV).</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> r<sub>d</sub> = 50mV/I<sub>D</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P19</span><span class="ttl">Aceeași diodă — 3 modele</span></div>
-              <div class="ln"><span class="tag t-r">1)</span> Ideal: I=E/R<sub>L</sub>. <span class="tag t-r">2)</span> Liniar: I=(E−0,7)/R<sub>L</sub>.</div>
-              <div class="ln"><span class="tag t-r">3)</span> Shockley: iterativ ca P18.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P20</span><span class="ttl">2 diode spre E<sub>1</sub>, E<sub>2</sub></span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Conduce dioda spre sursa mai MICĂ (catozi la E<sub>1</sub>,E<sub>2</sub>).</div>
-              <div class="ln"><span class="tag t-r">R:</span> Dacă E<sub>1</sub>=E<sub>2</sub> ⇒ împart I<sub>R</sub> egal.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P21</span><span class="ttl">2 diode serie între E<sub>1</sub>, E<sub>2</sub></span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> E<sub>1</sub>=E<sub>2</sub>⇒I=0; E<sub>1</sub>&gt;E<sub>2</sub>+1,2⇒conduc, I=(E<sub>1</sub>−E<sub>2</sub>−2V<sub>D</sub>)/R.</div>
-              <div class="ln"><span class="tag t-r">R:</span> E<sub>1</sub>&lt;E<sub>2</sub> ⇒ blocate, I=−I<sub>0</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P22</span><span class="ttl">Ramură 2 diode vs n diode</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Conduce ramura cu prag TOTAL mai mic!</div>
-              <div class="ln"><span class="tag t-r">R:</span> n=1⇒ramura de 1; n=2⇒egal; n=4⇒ramura de 2.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P23</span><span class="ttl">1 conducție, 1 blocată</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>1</sub> cond. din E<sub>1</sub> (iterativ pe R<sub>L</sub>).</div>
-              <div class="ln"><span class="tag t-r">R:</span> D<sub>2</sub> e polarizată invers de E<sub>1</sub>+E<sub>2</sub> ⇒ blocată.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P24</span><span class="ttl">Schottky (n) vs diodă pn</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Prag Schottky=0,2V, pn=0,6V. n=1⇒Schottky; n=4⇒pn.</div>
-              <div class="ln"><span class="tag t-w">⚠:</span> n=3⇒0,6=0,6 (I<sub>tot</sub>=3,4mA, împărțire nedeterminată fără Shockley).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P25</span><span class="ttl">2 diode paralel, I<sub>0</sub> diferit</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>D</sub> comun! I<sub>tot</sub> iterativ cu I<sub>0,tot</sub>=I<sub>01</sub>+I<sub>02</sub>.</div>
-              <div class="ln"><span class="tag t-f">F:</span> I<sub>D1</sub>/I<sub>D2</sub>=I<sub>01</sub>/I<sub>02</sub> | r<sub>dk</sub>=50mV/I<sub>Dk</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P26</span><span class="ttl">2 diode invers, în serie</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> I = −I<sub>01</sub> (cel mai MIC). D<sub>1</sub> preia &approx;E.</div>
-              <div class="ln"><span class="tag t-f">F:</span> V<sub>D2</sub> = 50mV·ln(1 − I<sub>01</sub>/I<sub>02</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P27</span><span class="ttl">Punte de diode</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Conduc 2 diode opuse: E = 2V<sub>D</sub> + I·R<sub>L</sub> (iterativ).</div>
-              <div class="ln"><span class="tag t-r">R:</span> La −E conduc celelalte 2, V<sub>L</sub> păstrează semnul!</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P28</span><span class="ttl">Diodă + Zener în serie</span></div>
-              <div class="ln"><span class="tag t-cc">E&gt;V<sub>Z</sub>:</span> Z străpuns, E=IR+V<sub>D</sub>+V<sub>Z</sub> (verif. I&ge;I<sub>Z,min</sub>).</div>
-              <div class="ln"><span class="tag t-w">E&lt;V<sub>Z</sub>:</span> Z blocat ⇒ impune I=I<sub>0Z</sub>, V<sub>Z</sub>=E−IR−V<sub>D</sub>.</div>
-            </div>
-          </div>
-
-          <!-- 2.3 P29–P39 -->
-          <div id="sub-d-29" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P29</span><span class="ttl">Limitator 2 Zener în opoziție</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Prag V<sub>lim</sub>=V<sub>Z</sub>+V<sub>D,on</sub>=5,5V.</div>
-              <div class="ln"><span class="tag t-r">R:</span> Sub prag: divizor R<sub>L</sub>/(R<sub>i</sub>+R<sub>L</sub>). Peste prag: v<sub>o</sub>=5,5V.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P30</span><span class="ttl">2 surse SAU + Zener</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Conduce dioda cu E MAXIM (poartă SAU).</div>
-              <div class="ln"><span class="tag t-r">R:</span> Verif. dacă divizorul R<sub>1</sub>,R<sub>L</sub> &gt; V<sub>Z</sub> ⇒ V<sub>o</sub>=V<sub>Z</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-r">P31</span><span class="ttl">Zener șunt + semnal e</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z</sub> străpuns (V=5V).</div>
-              <div class="ln"><span class="tag t-w">⚠ CA:</span> D<sub>Z</sub>=scurt la masă ⇒ blochează semnalul ⇒ <b>v<sub>o</sub>/e = 0</b>!</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P32</span><span class="ttl">Diode paralel pe divizor</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z</sub> fixează 10V. D<sub>2</sub>,D<sub>3</sub> catod sus (invers) ⇒ BLOCATE!</div>
-              <div class="ln"><span class="tag t-r">R:</span> I prin R<sub>2</sub>,R<sub>3</sub> = 10V/(R<sub>2</sub>+R<sub>3</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P33</span><span class="ttl">PSF: Liniar vs Shockley</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z1</sub> străpuns; D<sub>1</sub> cond. spre X, I se împarte în R<sub>2</sub> și R<sub>3</sub>+D<sub>3</sub>.</div>
-              <div class="ln"><span class="tag t-r">R:</span> Liniar (V<sub>D</sub>=0,7V) vs iterativ Shockley.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P34</span><span class="ttl">Rezistența R<sub>EB</sub> = e/i</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z</sub> fixează nodul la 5V; compari cu E<sub>1</sub> pt D<sub>1</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> D<sub>Z</sub>=scurt, E=masă ⇒ R<sub>ech</sub> văzută de e.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P35</span><span class="ttl">Zener serie &amp; v<sub>g</sub>/i<sub>g</sub></span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Verif. D<sub>Z1</sub>,D<sub>Z2</sub> (D<sub>1</sub>+R<sub>2</sub> poate coborî V ⇒ D<sub>Z2</sub> blocat!).</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>g</sub> vede (r<sub>d1</sub>+R<sub>2</sub>) &parallel; ramura stângă.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P36</span><span class="ttl">Rețea I + 3 Zener (Set A)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z3</sub>(9V) străpuns ⇒ D<sub>Z1</sub>+D<sub>Z2</sub>(24V) blocate.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> I=gol, D<sub>Z3</sub>=scurt ⇒ v<sub>g</sub>/i<sub>g</sub> = R<sub>1</sub> &parallel; (R<sub>2</sub>+2r<sub>d</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P37</span><span class="ttl">Rețea I + 3 Zener (Set B)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>N</sub>=6V, V<sub>M</sub>=9V ⇒ D<sub>1</sub> blocată!</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> N=masă prin Z ⇒ v<sub>g</sub>/i<sub>g</sub> = R<sub>1</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-r">P38</span><span class="ttl">Rețea I (Set C ⚠)</span></div>
-              <div class="ln"><span class="tag t-w">⚠ CC:</span> D<sub>4</sub> cond.(0,6V), V<sub>P</sub>&approx;1,2V ⇒ D<sub>1</sub> și D<sub>Z</sub> BLOCATE!</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>g</sub>/i<sub>g</sub> = r<sub>d4</sub> + R<sub>1</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P39</span><span class="ttl">Rețea I (Set D)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>N</sub>=5,6V, V<sub>M</sub>=9V ⇒ D<sub>1</sub>, D<sub>3</sub> blocate.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>g</sub>/i<sub>g</sub> = R<sub>1</sub> + r<sub>d2</sub>.</div>
-            </div>
-          </div>
-
-          <!-- 2.4 P40–P50 -->
-          <div id="sub-d-40" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P40</span><span class="ttl">3 ramuri cu surse (2 cazuri)</span></div>
-              <div class="ln"><span class="tag t-cc">Caz 1 (E<sub>2</sub>=−15):</span> D<sub>2</sub>,D<sub>3</sub> blocate, D<sub>1</sub> cond. ⇒ v<sub>g</sub>/i<sub>g</sub>=r<sub>d1</sub>+R.</div>
-              <div class="ln"><span class="tag t-ca">Caz 2 (E<sub>1</sub>=E<sub>2</sub>=15):</span> simetric ⇒ v<sub>g</sub>/i<sub>g</sub>=r<sub>d</sub>+(r<sub>d</sub>&parallel;R).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P41</span><span class="ttl">2 Zener + 3 D (Set 16-A)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>Z1</sub>(9)&gt;V<sub>Z2</sub>(6) ⇒ D<sub>1</sub>,D<sub>2</sub> cond., D<sub>3</sub> blocată.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>o</sub>/v<sub>g1</sub> = (R<sub>2</sub>+r<sub>d2</sub>)/(R<sub>2</sub>+r<sub>d1</sub>+r<sub>d2</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P42</span><span class="ttl">2 Zener + 3 D (Set 16-D)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>Z1</sub>(8)&gt;V<sub>Z2</sub>(6) ⇒ D<sub>1</sub>,D<sub>2</sub> cond., D<sub>3</sub> blocată.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> Identic P41.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-r">P43</span><span class="ttl">2 Zener + 3 D (16-C ⚠)</span></div>
-              <div class="ln"><span class="tag t-w">⚠ CC:</span> V<sub>Z1</sub>(6)&lt;V<sub>Z2</sub>(9) ⇒ D<sub>1</sub> BLOCATĂ!</div>
-              <div class="ln"><span class="tag t-w">⚠ CA:</span> <b>v<sub>o</sub>/v<sub>g1</sub> = 0</b>!</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P44</span><span class="ttl">2 Zener + 3 D (Set 16-B)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>Z2</sub>(6)&gt;V<sub>Z1</sub>(4) ⇒ D<sub>2</sub>,D<sub>3</sub> cond., D<sub>1</sub> blocată.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>o</sub>/v<sub>g2</sub> = (R<sub>3</sub>+r<sub>d3</sub>)/(R<sub>3</sub>+r<sub>d2</sub>+r<sub>d3</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P45</span><span class="ttl">2 Zener + sursă I</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>1</sub>=10V, V<sub>2</sub>=3,3V ⇒ D<sub>3</sub> cond. prin R<sub>2</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> I=gol, Z=scurt ⇒ v<sub>o</sub>/v<sub>g</sub> = r<sub>d3</sub>/(R<sub>2</sub>+r<sub>d3</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P46</span><span class="ttl">2 surse I<sub>1</sub>, I<sub>2</sub> + D blocată</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z</sub> fixează stânga la 12V. Calculezi V pe R<sub>2</sub>; fiind &gt;5V ⇒ D<sub>2</sub> blocată, D<sub>1</sub> cond.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P47</span><span class="ttl">Divizor cu 2 Zener (1 blocat)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z1</sub>(10V) străpuns; verif. V pe D<sub>Z2</sub>(4,8V) din R<sub>2</sub>,R<sub>3</sub> ⇒ unul blocat.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>ech</sub> din nodul de intrare.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P48</span><span class="ttl">Sursă I + 2 D + Z (2 cazuri)</span></div>
-              <div class="ln"><span class="tag t-cc">N=5,1V:</span> Caz 1(E<sub>2</sub>=3): D<sub>2</sub> bloc. ⇒ v<sub>g</sub>/i<sub>g</sub>=R<sub>1</sub>+r<sub>d1</sub>, v/v<sub>g</sub>=R<sub>1</sub>/(R<sub>1</sub>+r<sub>d1</sub>).</div>
-              <div class="ln"><span class="tag t-ca">Caz 2 (E<sub>1</sub>=E<sub>2</sub>=9):</span> simetric ⇒ v<sub>g</sub>/i<sub>g</sub>=(R<sub>1</sub>+r<sub>d</sub>)/2, v/v<sub>g</sub> identic.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-g">P49</span><span class="ttl">Rețea tip Parțial 2026</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>Z</sub> fixează 5,6V, verif. starea D<sub>1</sub>,D<sub>2</sub>,D<sub>3</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> C<sub>&infin;</sub>, Z=scurt ⇒ divizor pt v<sub>o</sub>/v<sub>g</sub>, R<sub>ech</sub> pt v<sub>g</sub>/i<sub>g</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-r">P50</span><span class="ttl">Parțial 2026 P1 (3 surse + I)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> D<sub>1,2,3</sub>=SAU ⇒ cond. doar D<sub>2</sub>(14V). D<sub>Z1</sub> străp.(9V). I trage prin D<sub>5..8</sub> ⇒ V<sub>C</sub>=−4V<sub>D</sub> ⇒ D<sub>4</sub> bloc.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>i</sub> prin Z+C<sub>&infin;</sub> pe 4 r<sub>d</sub> egale ⇒ <b>v<sub>o</sub>/v<sub>i</sub> = 1</b> (sus) sau <b>0,5</b> (mijloc).</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ========================================================
-             TAB 3: 3. TEC (P51–P86)
-             ======================================================== -->
-        <section id="panel-tec" class="panel">
-          <div class="pills" data-pillgroup="tec">
-            <button class="pill on-a" data-sub="q-etaje" type="button">Etaje</button>
-            <button class="pill" data-sub="q-51" type="button">P51-63</button>
-            <button class="pill" data-sub="q-64" type="button">P64-75</button>
-            <button class="pill" data-sub="q-76" type="button">P76-86</button>
-          </div>
-
-          <!-- 3.1 ETAJE & FORMULE RAPIDE -->
-          <div id="sub-q-etaje" class="sub active">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">F</span><span class="ttl">TEC-J &amp; TEC-MOS (I<sub>G</sub>=0)</span></div>
-              <div class="fm">TEC-J sat (|V<sub>DS</sub>|&ge;|V<sub>GS</sub>−V<sub>T</sub>|): I<sub>D</sub>=I<sub>DSS</sub>(1−V<sub>GS</sub>/V<sub>T</sub>)<sup>2</sup><br>g<sub>m</sub>=(2I<sub>DSS</sub>/|V<sub>T</sub>|)(1−V<sub>GS</sub>/V<sub>T</sub>)=2&radic;(I<sub>DSS</sub>I<sub>D</sub>)/|V<sub>T</sub>|<br>r<sub>ds</sub>=1/(&lambda;I<sub>D</sub>)<br>MOS indus: I<sub>D</sub>=(k<sub>n</sub>'/2)(W/L)(V<sub>GS</sub>−V<sub>T</sub>)<sup>2</sup> (⚠ /2!)<br>g<sub>m,MOS</sub> = 2I<sub>D</sub>/(V<sub>GS</sub>−V<sub>T</sub>)</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">TAB</span><span class="ttl">Tabel Etaje (SC / DC / GC)</span></div>
-              <table class="tbl ta">
-                <thead>
-                  <tr><th style="width:20%;">Etaj</th><th style="width:37%;">A<sub>v</sub></th><th style="width:21%;">R<sub>i</sub></th><th style="width:22%;">R<sub>o</sub></th></tr>
-                </thead>
-                <tbody class="m" style="font-size:0.88em;">
-                  <tr><td><b>SC</b><br>dec.</td><td>−g<sub>m</sub>(r<sub>ds</sub>&parallel;R<sub>D</sub>&parallel;R<sub>L</sub>)</td><td>R<sub>G</sub></td><td>r<sub>ds</sub>&parallel;R<sub>D</sub></td></tr>
-                  <tr><td><b>SC</b><br>nedec.</td><td>−g<sub>m</sub>R<sub>D</sub>'/(1+g<sub>m</sub>R<sub>S</sub>)</td><td>R<sub>G</sub></td><td>R<sub>D</sub>&parallel;[r<sub>ds</sub>(1+g<sub>m</sub>R<sub>S</sub>)+R<sub>S</sub>]</td></tr>
-                  <tr><td><b>DC</b><br>Rep.</td><td>+g<sub>m</sub>R<sub>e</sub>/(1+g<sub>m</sub>R<sub>e</sub>)<br>(+, &lt;1)</td><td>R<sub>G</sub></td><td>R<sub>S</sub>&parallel;r<sub>ds</sub>&parallel;(1/g<sub>m</sub>)</td></tr>
-                  <tr><td><b>GC</b><br>r<sub>ds</sub>=&infin;</td><td>+g<sub>m</sub>(R<sub>D</sub>&parallel;R<sub>L</sub>)<br>(+)</td><td>R<sub>S</sub>&parallel;(1/g<sub>m</sub>)<br>(NU &infin;!)</td><td>R<sub>D</sub></td></tr>
-                </tbody>
-              </table>
-              <div class="fm">A<sub>vg</sub>=A<sub>v</sub>·R<sub>i</sub>/(R<sub>i</sub>+R<sub>g</sub>) | A<sub>i</sub>=A<sub>v</sub>·R<sub>i</sub>/R<sub>L</sub> (⚠ NU /R<sub>o</sub>!)</div>
-            </div>
-          </div>
-
-          <!-- 3.2 P51–P63 -->
-          <div id="sub-q-51" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P51</span><span class="ttl">TEC-J V<sub>GS</sub>=0 (sursă curent)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> I<sub>D</sub>=I<sub>DSS</sub>, verif. V<sub>DS</sub>&ge;|V<sub>T</sub>|.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>o</sub>=r<sub>ds</sub> (&infin; dacă r<sub>ds</sub>=&infin;). R<sub>D,max</sub>=(V<sub>DD</sub>−|V<sub>T</sub>|)/I<sub>DSS</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P52</span><span class="ttl">Sursă + Zener în grilă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS</sub>=V<sub>Z</sub>−I<sub>D</sub>R<sub>2</sub> ⇒ ec. gr. 2!</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>o</sub>=r<sub>ds</sub>(1+g<sub>m</sub>R<sub>2</sub>)+R<sub>2</sub> (&infin; pt r<sub>ds</sub>=&infin;).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P53</span><span class="ttl">Repetor v<sub>i</sub> G-S (Set A)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>1</sub>(V<sub>GS</sub>=0)⇒I<sub>DSS</sub>; Q<sub>2</sub> autopolarizat R<sub>1</sub>⇒ec.gr.2.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>gs1</sub>=v<sub>i</sub> direct, Q<sub>2</sub>=gol ⇒ A<sub>v</sub> = g<sub>m1</sub>·R<sub>2</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P54</span><span class="ttl">Repetor v<sub>i</sub> G-S (Set C)</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Identic P53 (R<sub>2</sub> la V<sub>DD</sub>, același CA): A<sub>v</sub> = g<sub>m1</sub>·R<sub>2</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P55</span><span class="ttl">Autopolarizare + R<sub>o</sub> drenă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS</sub>=−I<sub>D</sub>R ⇒ ec.gr.2 (alegi V<sub>T</sub>&lt;V<sub>GS</sub>&le;0).</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>o</sub> drenă = r<sub>ds</sub>(1+g<sub>m</sub>R)+R.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P56</span><span class="ttl">Rezistența văzută în drenă</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Identic P55: autopolarizare ⇒ v<sub>g</sub>/i<sub>g</sub> = r<sub>ds</sub>(1+g<sub>m</sub>R<sub>S</sub>)+R<sub>S</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P57</span><span class="ttl">Sursă curent + Zener sursă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>G</sub>=0 (R<sub>1</sub> fără curent!), V<sub>GS</sub>=−V<sub>Z</sub>⇒I<sub>D</sub>. Verif. I<sub>Z</sub>=I<sub>D</sub>+I<sub>R2</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>o</sub> = r<sub>ds</sub> = 1/(&lambda;I<sub>D</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P58</span><span class="ttl">Sursă divizor + Z + D<sub>1</sub></span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>G</sub>=V<sub>DD</sub>R<sub>2</sub>/(R<sub>1</sub>+R<sub>2</sub>), V<sub>GS</sub>=V<sub>G</sub>−V<sub>Z</sub>⇒I<sub>D</sub>. V<sub>DD,min</sub> din I<sub>Z</sub>&ge;I<sub>Z,min</sub> &amp; V<sub>GS</sub>&gt;V<sub>T</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> r<sub>s</sub> = r<sub>ds</sub> + r<sub>d1</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P59</span><span class="ttl">Sursă divizor + Z (fără D)</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Identic P58 fără D<sub>1</sub>: R<sub>o</sub> = r<sub>ds</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P60</span><span class="ttl">Repetor cu 2 Zener</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS</sub>=−V<sub>Z1</sub>⇒I<sub>D</sub>. Verif. V<sub>DS</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>gs</sub>=v<sub>i</sub> ⇒ A<sub>v</sub> = g<sub>m</sub>·R.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P61</span><span class="ttl">SC cu D + Z în sursă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS</sub>=−V<sub>D</sub>⇒I<sub>D</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> D, Z=scurt ⇒ A<sub>v</sub> = −g<sub>m</sub>·R.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P62</span><span class="ttl">SC cu Zener în drenă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS</sub>=−V<sub>D</sub>⇒I<sub>D</sub>, V<sub>D</sub>=V<sub>DD</sub>−I<sub>D</sub>R<sub>2</sub>−V<sub>Z</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> Z=scurt ⇒ A<sub>v</sub> = −g<sub>m</sub>·R<sub>2</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P63</span><span class="ttl">GC cu Zener în sursă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS</sub>=−V<sub>Z</sub>⇒I<sub>D</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> G=masă(C<sub>&infin;</sub>), v<sub>i</sub> în S ⇒ GC: A<sub>v</sub> = +g<sub>m</sub>·R<sub>2</sub>.</div>
-            </div>
-          </div>
-
-          <!-- 3.3 P64–P75 -->
-          <div id="sub-q-64" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P64</span><span class="ttl">SC standard cu C<sub>S</sub></span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Autopolarizare.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> A<sub>v</sub>=−g<sub>m</sub>(r<sub>ds</sub>&parallel;R<sub>D</sub>&parallel;R<sub>L</sub>), A<sub>vg</sub>=A<sub>v</sub>R<sub>G</sub>/(R<sub>G</sub>+R<sub>g</sub>), R<sub>i</sub>=R<sub>G</sub>, R<sub>o</sub>=r<sub>ds</sub>&parallel;R<sub>D</sub>, A<sub>i</sub>=A<sub>v</sub>R<sub>i</sub>/R<sub>L</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P65</span><span class="ttl">SC cu R<sub>S</sub> nedecuplată</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Autopolarizare.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> A<sub>v</sub>=−g<sub>m</sub>(R<sub>D</sub>&parallel;R<sub>L</sub>)/(1+g<sub>m</sub>R<sub>S</sub>). Cu C<sub>S</sub> crește |A<sub>v</sub>| (dispare 1+g<sub>m</sub>R<sub>S</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P66</span><span class="ttl">DC — Repetor pe sursă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Autopolarizare.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>e</sub>=r<sub>ds</sub>&parallel;R<sub>S</sub>&parallel;R<sub>L</sub>; A<sub>v</sub>=g<sub>m</sub>R<sub>e</sub>/(1+g<sub>m</sub>R<sub>e</sub>); R<sub>i</sub>=R<sub>G</sub>; R<sub>o</sub>=R<sub>S</sub>&parallel;r<sub>ds</sub>&parallel;(1/g<sub>m</sub>); A<sub>i</sub>=A<sub>v</sub>R<sub>i</sub>/R<sub>L</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P67</span><span class="ttl">GC standard</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Autopolarizare.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> A<sub>v</sub>=+g<sub>m</sub>(R<sub>D</sub>&parallel;R<sub>L</sub>), R<sub>i</sub>=R<sub>S</sub>&parallel;(1/g<sub>m</sub>), R<sub>o</sub>=R<sub>D</sub>, A<sub>vg</sub>=A<sub>v</sub>R<sub>i</sub>/(R<sub>i</sub>+R<sub>g</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P68</span><span class="ttl">GC cu v<sub>i</sub> în sursă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS</sub>=0⇒I<sub>DSS</sub>. R<sub>1,max</sub> din V<sub>DS</sub>&ge;|V<sub>T</sub>|.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> A<sub>v</sub>=+g<sub>m</sub>·R<sub>2</sub>, R<sub>i</sub>=R<sub>1</sub>&parallel;(1/g<sub>m</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-r">P69</span><span class="ttl">Parțial 2026 P2 (Q<sub>1</sub>+Q<sub>2</sub>+D)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>1</sub>(V<sub>GS</sub>=0)⇒4mA, Q<sub>2</sub>(V<sub>GS</sub>=−0,6)⇒1mA. CA: Q<sub>2</sub>=gol.</div>
-              <div class="ln"><span class="tag t-w">⚠:</span> v<sub>i</sub> pe G⇒SC (A<sub>v</sub>=−g<sub>m1</sub>R<sub>2</sub>, R<sub>i</sub>=&infin;); în S⇒GC (A<sub>v</sub>=+g<sub>m1</sub>R<sub>2</sub>, R<sub>i</sub>=1/g<sub>m1</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P70</span><span class="ttl">SC + sarcină Q<sub>2</sub> p (16-A)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>2</sub>(p, V<sub>GS</sub>=0)=I<sub>DSS2</sub>; Q<sub>1</sub>(V<sub>GS</sub>=−V<sub>Z</sub>)=I<sub>1</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>e</sub>=R<sub>1</sub>&parallel;R<sub>2</sub>; A<sub>v</sub>=−g<sub>m1</sub>·R<sub>e</sub>; R<sub>o</sub>=R<sub>e</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P71</span><span class="ttl">GC + sarcină Q<sub>2</sub> p (16-B)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Ca P70.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>g</sub> în S ⇒ GC: A<sub>v</sub>=+g<sub>m1</sub>(R<sub>1</sub>&parallel;R<sub>2</sub>), R<sub>ig</sub>=1/g<sub>m1</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P72</span><span class="ttl">SC + Q<sub>2</sub> p, V<sub>SS</sub> (16-C)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>GS1</sub>=−V<sub>SS</sub>⇒I<sub>1</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> A<sub>v</sub>=−g<sub>m1</sub>(R<sub>1</sub>&parallel;R<sub>2</sub>), R<sub>o</sub>=R<sub>1</sub>&parallel;R<sub>2</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P73</span><span class="ttl">SC + Q<sub>2</sub> p, V<sub>SS</sub> (16-D)</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Identic P72 (v<sub>g</sub> pe G⇒SC, R<sub>ig</sub>=&infin;; v<sub>g</sub> în S⇒GC, R<sub>ig</sub>=1/g<sub>m1</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P74</span><span class="ttl">Repetor Q<sub>2</sub> p (21-B)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>1</sub> autopolarizat R<sub>1</sub>⇒ec.gr.2; Q<sub>2</sub>(p, V<sub>GS</sub>=0)=I<sub>DSS2</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> v<sub>gs1</sub>=v<sub>i</sub> ⇒ A<sub>v</sub> = g<sub>m1</sub>·R<sub>2</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P75</span><span class="ttl">Repetor Q<sub>2</sub> p (21-D)</span></div>
-              <div class="ln"><span class="tag t-r">R:</span> Identic P74 (R<sub>2</sub> la V<sub>DD</sub>): A<sub>v</sub> = g<sub>m1</sub>·R<sub>2</sub>.</div>
-            </div>
-          </div>
-
-          <!-- 3.4 P76–P86 -->
-          <div id="sub-q-76" class="sub">
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P76</span><span class="ttl">GC 2 diode + Q<sub>1</sub> p</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> I<sub>1</sub>=I<sub>DSS1</sub>; Q<sub>2</sub>(V<sub>GS</sub>=−2V<sub>D</sub>)⇒I<sub>2</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> D=scurt, Q<sub>2</sub> GC ⇒ A<sub>v</sub>=+g<sub>m2</sub>·R<sub>1</sub>, R<sub>o</sub>=R<sub>1</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P77</span><span class="ttl">SC + Q<sub>2</sub> p cu diodă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>2</sub>(V<sub>GS</sub>=+0,6V)⇒I<sub>2</sub>; Q<sub>1</sub> autopolarizat R<sub>1</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> SC nedec. ⇒ A<sub>vg</sub>=−g<sub>m1</sub>R<sub>2</sub>/(1+g<sub>m1</sub>R<sub>1</sub>), R<sub>i</sub>=&infin;, R<sub>o</sub>=R<sub>2</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P78</span><span class="ttl">3 TEC-J + 2 diode (R<sub>o</sub>)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>3</sub>(V<sub>GS</sub>=0)⇒I<sub>3</sub>; Q<sub>2</sub>(V<sub>GS</sub>=−2V<sub>D</sub>)⇒I<sub>2</sub>; apoi Q<sub>1</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> Repetor pe S<sub>1</sub> ⇒ R<sub>o</sub> = 1/g<sub>m1</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P79</span><span class="ttl">Alimentare diferențială (R<sub>o</sub>)</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>2</sub> cu Zener fixează curentul; afli Q<sub>1</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> Repetor pe sursă ⇒ R<sub>o</sub> = (1/g<sub>m1</sub>) &parallel; R<sub>ech</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P80</span><span class="ttl">Repetor MOS + TEC-J</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>2</sub>(V<sub>GS</sub>=−0,6V)⇒I<sub>D</sub>. MOS: I<sub>D</sub>=(k<sub>n</sub>'/2)(W/L)(V<sub>GS1</sub>−V<sub>T1</sub>)<sup>2</sup>⇒V<sub>GS1</sub>, g<sub>m1</sub>=2I<sub>D</sub>/V<sub>ov</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> DC ⇒ A<sub>v</sub>=g<sub>m1</sub>r<sub>ds2</sub>/(1+g<sub>m1</sub>r<sub>ds2</sub>), R<sub>o</sub>=(1/g<sub>m1</sub>)&parallel;r<sub>ds2</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P81</span><span class="ttl">Oglindă PMOS + TEC-J</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>1</sub> autopolarizat⇒I<sub>ref</sub>. Oglindă: I<sub>3</sub>=I<sub>ref</sub>⇒V<sub>SG</sub>, g<sub>m3</sub>=2I/(V<sub>SG</sub>−|V<sub>T</sub>|).</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> Q<sub>3</sub> GC ⇒ A<sub>v</sub>=g<sub>m3</sub>R<sub>2</sub>, R<sub>o</sub>=R<sub>2</sub>, R<sub>i</sub>=1/g<sub>m3</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P82</span><span class="ttl">DC cu sarcină activă Q<sub>2</sub></span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>2</sub>(V<sub>GS</sub>=0)⇒I<sub>DSS2</sub>=I<sub>D1</sub>⇒scoți V<sub>GS1</sub>.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>e</sub>=r<sub>ds1</sub>&parallel;r<sub>ds2</sub>&parallel;R<sub>L</sub>; A<sub>v</sub>=g<sub>m1</sub>R<sub>e</sub>/(1+g<sub>m1</sub>R<sub>e</sub>); R<sub>o</sub>=r<sub>ds1</sub>&parallel;r<sub>ds2</sub>&parallel;(1/g<sub>m1</sub>).</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P83</span><span class="ttl">SC cu Z &parallel; Q<sub>2</sub> în sursă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>2</sub>=I<sub>DSS2</sub>. Dacă D<sub>Z</sub> străp.(V<sub>S</sub>=V<sub>SS</sub>+V<sub>Z</sub>) ⇒ S=masă c.a. (A<sub>v</sub>=−g<sub>m1</sub>(R<sub>D</sub>&parallel;R<sub>L</sub>)).</div>
-              <div class="ln"><span class="tag t-w">⚠:</span> La V<sub>SS</sub>=−4V verif. dacă Z mai e străpuns sau Q<sub>1</sub> iese din saturație!</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P84</span><span class="ttl">DC: diode grilă, Z sursă</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> R<sub>1</sub>,D<sub>1</sub>,D<sub>2</sub>,R<sub>3</sub>⇒V<sub>G</sub>(iterativ); V<sub>S</sub>=V<sub>Z</sub>+I<sub>D</sub>R<sub>2</sub>⇒ec.gr.2.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> R<sub>i</sub>=R<sub>1</sub>&parallel;(2r<sub>d</sub>+R<sub>3</sub>) (NU R<sub>G</sub>!); DC pt A<sub>v</sub>, R<sub>o</sub>.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-r">P85</span><span class="ttl">SC cu diode în grilă ⚠</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> V<sub>G</sub>=2V<sub>D</sub>(iterativ), V<sub>GS</sub>=2V<sub>D</sub>−I<sub>D</sub>R<sub>S</sub>⇒ec.gr.2.</div>
-              <div class="ln"><span class="tag t-w">⚠ CA:</span> R<sub>i</sub>=R<sub>1</sub>&parallel;2r<sub>d</sub> (foarte mic!) ⇒ divizor cu R<sub>g</sub>=600&Omega; ⇒ <b>A<sub>vg</sub> &ll; A<sub>v</sub></b>!</div>
-            </div>
-
-            <div class="card">
-              <div class="card-hd"><span class="bdg b-a">P86</span><span class="ttl">2 etaje: SC + DC cuplate</span></div>
-              <div class="ln"><span class="tag t-cc">CC:</span> Q<sub>1</sub> autopolarizat⇒V<sub>D1</sub>=V<sub>G2</sub>; Q<sub>2</sub>: V<sub>S2</sub>=0,6+I<sub>D2</sub>R<sub>2</sub>⇒ec.gr.2.</div>
-              <div class="ln"><span class="tag t-ca">CA:</span> A<sub>v</sub>=(−g<sub>m1</sub>R<sub>D1</sub>)·[g<sub>m2</sub>(R<sub>2</sub>&parallel;R<sub>L</sub>)/(1+g<sub>m2</sub>(R<sub>2</sub>&parallel;R<sub>L</sub>))]. DC izolează R<sub>L</sub> mic de drena Q<sub>1</sub>!</div>
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-      <button id="fabTop" class="fab-top" type="button" aria-label="Sus">&uarr;</button>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      const screen = document.getElementById('screen');
-      const fabTop = document.getElementById('fabTop');
-      const fsDown = document.getElementById('fsDown');
-      const fsUp = document.getElementById('fsUp');
-      const modeBtn = document.getElementById('modeBtn');
-
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      const panels = {
-        teorie: document.getElementById('panel-teorie'),
-        diode: document.getElementById('panel-diode'),
-        tec: document.getElementById('panel-tec')
-      };
-
-      const tabActiveClass = { teorie: 'active-t', diode: 'active-d', tec: 'active-q' };
-      const pillActiveClass = { teorie: 'on-c', diode: 'on-g', tec: 'on-a' };
-
-      /* 1. Comutare 3 tab-uri principale */
-      tabBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const target = btn.getAttribute('data-tab');
-          tabBtns.forEach((b) => b.classList.remove('active-t', 'active-d', 'active-q'));
-          btn.classList.add(tabActiveClass[target]);
-
-          Object.keys(panels).forEach((k) => {
-            panels[k].classList.toggle('active', k === target);
-          });
-          screen.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      });
-
-      /* 2. Sub-pastile cu reset instant la scroll top */
-      document.querySelectorAll('.pills').forEach((group) => {
-        const gName = group.getAttribute('data-pillgroup');
-        const cls = pillActiveClass[gName];
-        const btns = group.querySelectorAll('.pill');
-        const panel = panels[gName];
-        const subs = panel.querySelectorAll('.sub');
-
-        btns.forEach((p) => {
-          p.addEventListener('click', () => {
-            const subId = 'sub-' + p.getAttribute('data-sub');
-            btns.forEach((x) => x.classList.remove('on-c', 'on-g', 'on-a'));
-            p.classList.add(cls);
-            subs.forEach((s) => s.classList.toggle('active', s.id === subId));
-            screen.scrollTo({ top: 0, behavior: 'auto' });
-          });
-        });
-      });
-
-      /* 3. Font A- / A+ (10px – 18px, implicit 13px) */
-      let fs = 13;
-      function updateFs() {
-        document.documentElement.style.setProperty('--fs', fs + 'px');
-      }
-      fsDown.addEventListener('click', () => { if (fs > 10) { fs--; updateFs(); } });
-      fsUp.addEventListener('click', () => { if (fs < 18) { fs++; updateFs(); } });
-
-      /* 4. Scroll-to-top + suport bezel rotativ (wheel) */
-      screen.addEventListener('scroll', () => {
-        fabTop.classList.toggle('show', screen.scrollTop > 110);
-      }, { passive: true });
-
-      fabTop.addEventListener('click', () => {
-        screen.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      window.addEventListener('wheel', (e) => {
-        if (!screen.contains(e.target)) {
-          screen.scrollBy({ top: e.deltaY, behavior: 'auto' });
-        }
-      }, { passive: true });
-
-      /* 5. Mod Ceas (450x450) / Mod Complet pe desktop */
-      modeBtn.addEventListener('click', () => {
-        const full = document.body.classList.toggle('full-mode');
-        modeBtn.textContent = full ? 'Mod Ceas (450px)' : 'Mod Complet';
-      });
-    })();
-  </script>
+<button id="mode" type="button">Ecran complet</button>
+<main id="scr"><div class="wrap">
+ <div class="top"><button class="fb" id="fm" type="button" aria-label="Font mai mic">A−</button><b>DE · GHID</b><button class="fb" id="fp" type="button" aria-label="Font mai mare">A+</button></div>
+ <nav class="tabs">
+  <button type="button" data-t="t" class="on">Teorie</button>
+  <button type="button" data-t="m">Algoritmi</button>
+  <button type="button" data-t="p">De memorat</button>
+ </nav>
+ <div class="srch" id="sw"><input id="q" type="search" placeholder="Caută: zener, RSS, g_m…" autocomplete="off"><button id="qc" type="button" aria-label="Șterge">✕</button></div>
+ <div id="res"><div class="meta" id="rm"></div><div id="rl"></div></div>
+<div class="panel on" id="tab-t"><nav class="pills" data-tab="t"><button type="button" data-sub="tpoze" class="on">Subiecte poze</button><button type="button" data-sub="tsemi">Semiconductor</button><button type="button" data-sub="tjon">Joncțiune</button><button type="button" data-sub="tdio">Diode</button><button type="button" data-sub="ttec">TEC-J &amp; MOS</button></nav><div class="sub on" id="sub-tpoze"><details class="pb"><summary><span class="no">1</span><span class="tt">Dioda Zener și regimul ei uzual</span></summary><div class="bd"><p>Diodă pn făcută să lucreze în <b>străpungere inversă</b>. Acolo tensiunea la borne rămâne aproape constantă (V<sub>Z</sub>) pe un domeniu larg de curenți.</p><p class="r">Regim uzual: polarizată <b>invers, în străpungere</b>, cu I<sub>Z</sub> ≥ I<sub>Z,min</sub> (și sub puterea maximă). Rol: stabilizator / referință de tensiune.</p></div></details><details class="pb"><summary><span class="no">2</span><span class="tt">pn redresoare vs. Schottky: asemănare + deosebire</span></summary><div class="bd"><p><b>Asemănare:</b> ambele redresează: conduc în direct, blochează în invers, după o lege exponențială I = I<sub>0</sub>[e<sup>V/mV<sub>th</sub></sup> − 1].</p><p><b>Deosebire:</b> Schottky e un contact <b>metal–semiconductor</b> și conduce doar prin majoritari (unipolar) ⇒ prag mic (≈ 0,2–0,3 V) și comutare rapidă (nu stochează minoritari). pn: prag ≈ 0,6–0,7 V, mai lentă.</p></div></details><details class="pb"><summary><span class="no">3</span><span class="tt">pn vs. Schottky: două asemănări</span></summary><div class="bd"><p>1) Ambele au <b>comportare redresoare</b> (conduc în direct, blochează în invers).</p><p>2) Ambele au <b>caracteristică exponențială</b> I = I<sub>0</sub>[e<sup>V/mV<sub>th</sub></sup> − 1] și se străpung la tensiune inversă mare.</p></div></details><details class="pb"><summary><span class="no">4</span><span class="tt">Joncțiunea asimetrică și zona de barieră</span></summary><div class="bd"><p>O regiune e <b>mult mai puternic dopată</b> decât cealaltă: p⁺n (N<sub>A</sub> ≫ N<sub>D</sub>) sau n⁺p.</p><p class="r">Zona de barieră (RSS) se întinde aproape toată în regiunea <b>slab dopată</b>, pentru că x<sub>p</sub>N<sub>A</sub> = x<sub>n</sub>N<sub>D</sub>.</p></div></details><details class="pb"><summary><span class="no">5</span><span class="tt">Electron vs. gol: asemănare + deosebire</span></summary><div class="bd"><p><b>Asemănare:</b> amândoi sunt purtători mobili de sarcină, cu |q| = 1,6·10<sup>-19</sup> C; participă la drift și la difuzie.</p><p><b>Deosebire:</b> electronul e negativ și se mișcă în banda de conducție; golul e pozitiv și se mișcă în banda de valență. μ<sub>n</sub> &gt; μ<sub>p</sub>.</p></div></details><details class="pb"><summary><span class="no">6</span><span class="tt">Capacitorul MOS în inversie puternică</span></summary><div class="bd"><p>Pe substrat p, sub poartă se formează un <b>strat de inversie</b> de electroni, mai concentrat decât golurile din volum.</p><p class="r">Condiție: <b>V<sub>GS</sub> &gt; V<sub>T</sub></b> (tensiunea de prag).</p><p class="r">Armătura negativă (semiconductorul) conține <b>electronii mobili</b> din stratul de inversie + <b>ionii acceptori</b> ficși (negativi) din zona golită.</p></div></details><details class="pb"><summary><span class="no">7</span><span class="tt">Semiconductorul de tip p</span></summary><div class="bd"><p>Semiconductor dopat cu impurități <b>acceptoare</b> (trivalente, ex. B). Golurile sunt majoritare.</p><div class="f">p ≈ N<sub>A</sub><i class="g"></i>n = <span class="fr"><span>n<sub>i</sub>²</span><span>N<sub>A</sub></span></span><i class="g"></i>n·p = n<sub>i</sub>²</div></div></details><details class="pb"><summary><span class="no">8</span><span class="tt">Mobilitatea golurilor depinde de…</span></summary><div class="bd"><p class="r">1) <b>temperatură</b> (scade când T crește, pentru că cresc ciocnirile cu rețeaua);</p><p class="r">2) <b>concentrația totală de impurități</b> (scade la dopaj mare, prin împrăștiere pe ioni).</p><p>(La câmpuri foarte mari depinde și de câmp: viteza se saturează.)</p></div></details><details class="pb"><summary><span class="no">9</span><span class="tt">Tabel Zener — Set D-25-01</span></summary><div class="bd"><p><b>Metoda:</b> cât timp |V<sub>D</sub>| &lt; V<sub>Z</sub>, curentul e constant = I<sub>0</sub> (blocare). Unde curentul sare la mA, tensiunea rămâne fixă = V<sub>Z</sub>.</p><p class="r">I<sub>0</sub> = 10 nA, V<sub>Z</sub> = 18 V (R<sub>Z</sub> = 0)</p><p>Completare: −5 V → 10 nA · −10 V → 10 nA · 15 mA → −18 V.</p></div></details><details class="pb"><summary><span class="no">10</span><span class="tt">Tabel Zener — al doilea set</span></summary><div class="bd"><p class="r">I<sub>0</sub> = 15 nA, V<sub>Z</sub> = 25 V</p><p>Completare: −8 V → 15 nA · 7 mA → −25 V · 15 mA → −25 V.</p></div></details></div><div class="sub" id="sub-tsemi"><details class="pb"><summary><span class="no">1</span><span class="tt">Semiconductor intrinsec / compensat</span></summary><div class="bd"><p><b>Intrinsec:</b> pur, n = p = n<sub>i</sub>.</p><p><b>Compensat:</b> conține și donori, și acceptori. Tipul îl dă impuritatea mai abundentă, iar concentrația netă e |N<sub>D</sub> − N<sub>A</sub>|. Dacă N<sub>A</sub> = N<sub>D</sub> ⇒ n = p = n<sub>i</sub> (se comportă ca intrinsec).</p></div></details><details class="pb"><summary><span class="no">2</span><span class="tt">Semiconductorul de tip n</span></summary><div class="bd"><p>Dopat cu <b>donori</b> (pentavalenți: P, As). Electronii sunt majoritari: n ≈ N<sub>D</sub>, p = n<sub>i</sub>²/N<sub>D</sub>.</p></div></details><details class="pb"><summary><span class="no">3</span><span class="tt">Echilibrul termic</span></summary><div class="bd"><p>Nu primește energie din exterior în afară de căldură ⇒ <b>curent net nul</b>, generare = recombinare, n·p = n<sub>i</sub>², E<sub>F</sub> constant în tot materialul.</p></div></details><details class="pb"><summary><span class="no">4</span><span class="tt">Curentul electric în semiconductor</span></summary><div class="bd"><p>Deplasarea ordonată a electronilor și a golurilor. Are două componente:</p><p><b>Drift</b> (sub acțiunea unui câmp): J = q(μ<sub>n</sub>n + μ<sub>p</sub>p)E.</p><p><b>Difuzie</b> (dacă concentrația nu e uniformă): J = qD·dn/dx.</p></div></details><details class="pb"><summary><span class="no">5</span><span class="tt">Banda de conducție</span></summary><div class="bd"><p>Banda permisă de deasupra benzii interzise (E ≥ E<sub>C</sub>). Electronii din ea sunt liberi și conduc. (Banda de valență: E ≤ E<sub>V</sub>; acolo se mișcă golurile.)</p></div></details><details class="pb"><summary><span class="no">6</span><span class="tt">Semiconductor degenerat</span></summary><div class="bd"><p>Dopaj foarte mare ⇒ E<sub>F</sub> ajunge la mai puțin de 3kT de o bandă sau intră în ea. Statistica Boltzmann nu mai e valabilă.</p></div></details></div><div class="sub" id="sub-tjon"><details class="pb"><summary><span class="no">1</span><span class="tt">Joncțiunea pn</span></summary><div class="bd"><p>Zona de trecere dintre o regiune p și una n din același cristal.</p></div></details><details class="pb"><summary><span class="no">2</span><span class="tt">Cum apare RSS</span></summary><div class="bd"><p>Concentrațiile diferă ⇒ majoritarii <b>difuzează</b> (golurile p→n, electronii n→p) și se recombină.</p><p>În urmă rămân <b>ionii ficși</b> (acceptori − în p, donori + în n) ⇒ sarcină spațială ⇒ <b>câmp electric</b> (de la n spre p).</p><p>Câmpul se opune difuziei. Echilibrul apare când driftul compensează difuzia.</p></div></details><details class="pb"><summary><span class="no">3</span><span class="tt">Zona golită / de barieră: justificarea numelor</span></summary><div class="bd"><p><b>Golită:</b> aproape fără purtători mobili.</p><p><b>Regiune de sarcină spațială:</b> conține sarcina ionilor ficși.</p><p><b>De barieră:</b> pe ea apare diferența de potențial Φ<sub>0</sub> (≈ 0,7 V la Si), o barieră pe care majoritarii trebuie s-o treacă.</p></div></details><details class="pb"><summary><span class="no">4</span><span class="tt">Polarizarea directă</span></summary><div class="bd"><p><b>+ pe p, − pe n</b> (V<sub>A</sub> &gt; 0) ⇒ bariera scade la Φ<sub>0</sub> − V<sub>A</sub>, RSS se îngustează ⇒ curent mare, exponențial.</p></div></details><details class="pb"><summary><span class="no">5</span><span class="tt">De ce curentul invers e mic</span></summary><div class="bd"><p>Bariera crește, iar majoritarii nu o mai pot trece. Curentul vine doar de la <b>minoritari</b> generați termic, care sunt puțini ⇒ I ≈ −I<sub>0</sub> (nA), aproape independent de tensiune.</p></div></details><details class="pb"><summary><span class="no">6</span><span class="tt">Comportarea redresoare</span></summary><div class="bd"><p>Joncțiunea lasă curentul să treacă ușor <b>într-un singur sens</b> (direct: mare, exponențial) și aproape deloc în celălalt (invers: −I<sub>0</sub>).</p></div></details><details class="pb"><summary><span class="no">7</span><span class="tt">Notația p⁺n; joncțiune groasă / subțire</span></summary><div class="bd"><p><b>p⁺n:</b> „+” = regiune p mult mai puternic dopată ⇒ joncțiune asimetrică.</p><p><b>Groasă:</b> regiunile neutre sunt mai lungi decât lungimea de difuzie a minoritarilor (W ≫ L). <b>Subțire:</b> W ≪ L (minoritarii ajung la contact fără să se recombine).</p></div></details></div><div class="sub" id="sub-tdio"><details class="pb"><summary><span class="no">1</span><span class="tt">Parametri statici / dinamici ai diodei</span></summary><div class="bd"><p><b>Statici</b> (c.c., majuscule): I<sub>0</sub>, m, V<sub>D,on</sub>, V<sub>BR</sub> (V<sub>Z</sub>), R<sub>s</sub>.</p><p><b>Dinamici</b> (semnal mic, minuscule): r<sub>d</sub> = mV<sub>th</sub>/I<sub>D</sub>, C<sub>j</sub>, C<sub>d</sub>.</p></div></details><details class="pb"><summary><span class="no">2</span><span class="tt">Capacitățile C<sub>j</sub> și C<sub>d</sub></span></summary><div class="bd"><p><b>C<sub>j</sub></b> (de barieră): vine din sarcina RSS, care variază cu tensiunea. Domină în <b>invers</b>. Contează la frecvențe înalte (la JF se neglijează).</p><p><b>C<sub>d</sub></b> (de difuzie): vine din minoritarii injectați, ∝ I<sub>D</sub>. Domină în <b>direct</b>.</p></div></details><details class="pb"><summary><span class="no">3</span><span class="tt">Dioda varicap</span></summary><div class="bd"><p>Condensator variabil comandat în tensiune (se folosește C<sub>j</sub>(V)). Se polarizează <b>invers</b>.</p></div></details><details class="pb"><summary><span class="no">4</span><span class="tt">LED</span></summary><div class="bd"><p>Emite lumină când e polarizat <b>direct</b>, prin recombinare radiativă electron–gol.</p></div></details><details class="pb"><summary><span class="no">5</span><span class="tt">Circuite echivalente</span></summary><div class="bd"><p><b>Diodă blocată:</b> sursă de curent −I<sub>0</sub> în c.c.; C<sub>j</sub> în c.a.</p><p><b>Zener în stabilizare:</b> sursă V<sub>Z</sub> în serie cu R<sub>Z</sub>.</p><p><b>Diodă în conducție, semnal mic:</b> r<sub>d</sub> (în paralel cu C<sub>d</sub> la IF).</p></div></details><details class="pb"><summary><span class="no">6</span><span class="tt">Efectul temperaturii</span></summary><div class="bd"><p>V<sub>th</sub> = kT/q <b>crește</b> cu T. I<sub>0</sub> crește puternic cu T ⇒ la curent constant, V<sub>D</sub> scade (≈ −2 mV/°C).</p></div></details></div><div class="sub" id="sub-ttec"><details class="pb"><summary><span class="no">1</span><span class="tt">Justificați denumirea TEC-J</span></summary><div class="bd"><p><b>Efect de câmp:</b> curentul e controlat de câmpul electric creat de V<sub>GS</sub>, care modifică lățimea canalului.</p><p><b>Cu joncțiune:</b> poarta e o joncțiune pn polarizată invers.</p></div></details><details class="pb"><summary><span class="no">2</span><span class="tt">De ce TEC-J e dispozitiv unipolar</span></summary><div class="bd"><p>Curentul e transportat de <b>un singur tip de purtători</b> (majoritarii din canal). Alte unipolare: TEC-MOS, MESFET, dioda Schottky.</p></div></details><details class="pb"><summary><span class="no">3</span><span class="tt">Doi parametri statici ai TEC-J</span></summary><div class="bd"><p><b>I<sub>DSS</sub>:</b> curentul de drenă la V<sub>GS</sub> = 0, în saturație (cel mai mare curent posibil).</p><p><b>V<sub>T</sub></b> (V<sub>P</sub>): tensiunea de prag (de închidere a canalului). Al treilea: λ (modularea lungimii canalului).</p></div></details><details class="pb"><summary><span class="no">4</span><span class="tt">Tipul canalului și regimurile</span></summary><div class="bd"><p>V<sub>T</sub> &lt; 0 ⇒ <b>canal n</b>; V<sub>T</sub> &gt; 0 ⇒ <b>canal p</b>.</p><p><b>Blocare:</b> V<sub>GS</sub> dincolo de V<sub>T</sub>. <b>Triodă:</b> |V<sub>DS</sub>| &lt; |V<sub>GS</sub> − V<sub>T</sub>|. <b>Saturație:</b> |V<sub>DS</sub>| ≥ |V<sub>GS</sub> − V<sub>T</sub>|.</p><p><b>Închiderea canalului</b> (pinch-off): RSS-urile se ating lângă drenă, la |V<sub>DS</sub>| = |V<sub>GS</sub> − V<sub>T</sub>|.</p></div></details><details class="pb"><summary><span class="no">5</span><span class="tt">PSF-ul de drift nul cu temperatura</span></summary><div class="bd"><p>Când T crește, mobilitatea scade (I<sub>D</sub> scade), dar RSS se îngustează și |V<sub>T</sub>| crește (I<sub>D</sub> crește).</p><p class="r">Există un V<sub>GS</sub> (tipic |V<sub>GS</sub> − V<sub>T</sub>| ≈ 0,6 V) la care efectele se compensează ⇒ I<sub>D</sub> nu depinde de T</p></div></details><details class="pb"><summary><span class="no">6</span><span class="tt">Panta g<sub>m</sub> și r<sub>ds</sub></span></summary><div class="bd"><p><b>g<sub>m</sub></b> = dI<sub>D</sub>/dV<sub>GS</sub> (transconductanță, „panta”): cât de mult variază I<sub>D</sub> la o variație a lui V<sub>GS</sub>. Maximă la V<sub>GS</sub> = 0: g<sub>m0</sub> = 2I<sub>DSS</sub>/|V<sub>T</sub>|.</p><p><b>r<sub>ds</sub></b> = 1/(λI<sub>D</sub>): rezistența de ieșire în saturație.</p><p>Cu T: I<sub>DSS</sub> și g<sub>m</sub> <b>scad</b>.</p></div></details></div></div><div class="panel" id="tab-m"><nav class="pills" data-tab="m"><button type="button" data-sub="mplan" class="on">1 · Plan</button><button type="button" data-sub="mdio">2 · Diode c.c.</button><button type="button" data-sub="mca">3 · Diode c.a.</button><button type="button" data-sub="mtec">4 · TEC-J c.c.</button><button type="button" data-sub="mtca">5 · TEC-J c.a.</button><button type="button" data-sub="msemi">6 · Semiconductor</button><button type="button" data-sub="mex">Exemple</button></nav><div class="sub on" id="sub-mplan"><section class="card"><h3>Orice problemă: c.c. apoi c.a.</h3><p><b>1. Citește cerința:</b> PSF? A<sub>v</sub>? R<sub>i</sub>? R<sub>o</sub>? v<sub>g</sub>/i<sub>g</sub>?</p><p><b>2. Circuitul de c.c.:</b> C<sub>∞</sub> = gol, sursele de semnal = 0 (scurt dacă sunt de tensiune).</p><p><b>3. Presupune stările:</b> diode / Zener / TEC (pașii 2 și 4).</p><p><b>4. Calculează PSF-ul</b>, apoi <b>verifică fiecare ipoteză</b>. Dacă una cade, schimbă starea și reia.</p><p><b>5. Circuitul de c.a.:</b> aplici tabelul c.c. → c.a. (De memorat). Elementele cu impedanță ∞ dispar, cele cu 0 devin fire.</p><p><b>6. Calculează</b> mărimea cerută (pașii 3 și 5).</p></section><section class="card"><h3>Cum decizi starea unei diode, rapid</h3><p><b>Dioda ON</b> dacă potențialul de la anod încearcă să fie mai mare decât la catod cu ≥ 0,6 V.</p><p><b>Zener străpuns</b> dacă tensiunea inversă disponibilă ≥ V<sub>Z</sub> <b>și</b> circuitul poate da I<sub>Z</sub> ≥ I<sub>Z,min</sub>.</p><p class="w">Nu știi? Presupune ON, calculează și verifică semnul curentului / tensiunii.</p><p><b>Diode „SAU”</b> (mai multe surse spre același nod prin diode): conduce doar dioda spre sursa care dă potențialul cel mai mare. Celelalte sunt invers ⇒ blocate.</p><p><b>Nod fixat</b> de un Zener străpuns sau de o diodă ON spre masă ⇒ potențialul lui e cunoscut. Pornește calculul de acolo.</p></section></div><div class="sub" id="sub-mdio"><section class="card"><h3>Algoritm PSF diode + Zener</h3><p><b>1. Fixează potențialele cunoscute:</b> surse, Zener străpunse (V<sub>Z</sub>), diode ON spre masă (≈ 0,6 V).</p><p><b>2. Pune ecuațiile:</b> TKII pe ochiuri (sau TKI în noduri): E = IR + ΣV<sub>D</sub> + V<sub>Z</sub>.</p><p><b>3. Iterează:</b> pornești cu V<sub>D</sub> = 0,6 V (sau 0), afli I din TKII, apoi:</p><div class="f">V<sub>D</sub> = mV<sub>th</sub>·ln<span class="fr"><span>I<sub>D</sub></span><span>I<sub>0</sub></span></span><i class="g"></i>(mV<sub>th</sub> = 50 mV pentru m = 2)</div><p>Reiei TKII cu noul V<sub>D</sub>. Te oprești când V<sub>D</sub> se schimbă cu &lt; 1 mV (2–3 pași).</p><p class="w"><b>4. Verifică:</b> diodă ON ⇒ I<sub>D</sub> &gt; 0 · diodă OFF ⇒ V<sub>D</sub> &lt; 0 · Zener ⇒ I<sub>Z</sub> ≥ I<sub>Z,min</sub>. Altfel schimbi starea și reiei de la 1.</p><p><b>5. Elemente blocate:</b> diodă ⇒ I = −I<sub>0</sub>; Zener ⇒ I = −I<sub>0Z</sub>; V se află din TKII.</p></section><section class="card"><h3>Surse de curent</h3><p>Curentul ramurii e <b>impus</b> (= I), oricare ar fi diodele din ea. Le afli doar V<sub>D</sub> (Shockley).</p><p>Tensiunea pe sursa de curent iese din TKII. Ea <b>absoarbe</b> diferența de potențial.</p><p>TKI în nodul unde intră I: I se împarte între ramurile care pleacă.</p></section><section class="card"><h3>Cazuri speciale</h3><p><b>Diode în paralel, I<sub>0</sub> diferit:</b> aceeași V<sub>D</sub>; curenții se împart ca I<sub>01</sub> : I<sub>02</sub>.</p><div class="f">V<sub>D</sub> = mV<sub>th</sub>·ln<span class="fr"><span>I<sub>tot</sub></span><span>I<sub>01</sub> + I<sub>02</sub></span></span></div><p><b>Diode în serie, ambele invers:</b> I = −I<sub>0,min</sub>. Dioda cu I<sub>0</sub> mic preia aproape toată tensiunea; cealaltă are V = mV<sub>th</sub>·ln(1 − I<sub>0,mic</sub>/I<sub>0,mare</sub>) (câțiva mV).</p><p><b>Punte:</b> conduc 2 diode opuse; ieșirea păstrează polaritatea.</p><p><b>Model liniar</b> (dacă se cere): V<sub>D</sub> = 0,6–0,7 V constant, fără iterație.</p></section></div><div class="sub" id="sub-mca"><section class="card"><h3>Construiește schema de semnal mic</h3><p>Sursele de tensiune c.c. → <b>masă</b>. Sursele de curent → <b>gol</b>. C<sub>∞</sub> → <b>fir</b>.</p><p>Diodă ON → r<sub>d</sub> = 50 mV/I<sub>D</sub>. Diodă OFF → gol.</p><p>Zener străpuns → <b>fir</b> (R<sub>Z</sub> = 0). Zener blocat → gol.</p><p class="w">Elimină tot ce rămâne „în aer”: ramurile cu un gol în serie nu duc curent.</p></section><section class="card"><h3>v<sub>g</sub>/i<sub>g</sub> (rezistența văzută de sursa de semnal)</h3><p>Te așezi în locul lui v<sub>g</sub> și calculezi rezistența echivalentă spre restul circuitului: serie / paralel.</p><div class="f"><span class="fr"><span>v<sub>g</sub></span><span>i<sub>g</sub></span></span> = R<sub>ech</sub><i class="g"></i>(ex. R<sub>1</sub> ∥ (R<sub>2</sub> + 2r<sub>d</sub>))</div><p>Dacă v<sub>g</sub> e în serie cu o diodă ON, adaugi și r<sub>d</sub> al ei.</p></section><section class="card"><h3>v<sub>o</sub>/v<sub>i</sub> (raport de transfer)</h3><p>De obicei e un <b>divizor de tensiune</b> între v<sub>i</sub> și masă:</p><div class="f"><span class="fr"><span>v<sub>o</sub></span><span>v<sub>i</sub></span></span> = <span class="fr"><span>R<sub>jos</sub></span><span>R<sub>sus</sub> + R<sub>jos</sub></span></span></div><p>Lanț de n diode identice (același curent), ieșire după k diode de la masă ⇒ v<sub>o</sub>/v<sub>i</sub> = k/n.</p><p class="w"><b>Raport 0:</b> dacă între v<sub>i</sub> și ieșire e o diodă blocată, sau dacă nodul e pus la masă de un Zener (R<sub>Z</sub> = 0).</p></section></div><div class="sub" id="sub-mtec"><section class="card"><h3>Algoritm PSF TEC-J</h3><p><b>1. Tipul canalului:</b> V<sub>T</sub> &lt; 0 ⇒ n; V<sub>T</sub> &gt; 0 ⇒ p. Presupui <b>saturație</b> și <b>I<sub>G</sub> = 0</b> (rezistențele din poartă nu au cădere).</p><p><b>2. Află V<sub>GS</sub>.</b> Vezi ce fixează poarta și sursa:</p><p>• <b>G legată de S</b> (direct sau printr-o rezistență fără curent) ⇒ V<sub>GS</sub> = 0 ⇒ <b>I<sub>D</sub> = I<sub>DSS</sub></b> (sursă de curent).</p><p>• <b>V<sub>G</sub> și V<sub>S</sub> fixate</b> (masă, divizor, Zener, diode, surse) ⇒ V<sub>GS</sub> = V<sub>G</sub> − V<sub>S</sub> direct ⇒ I<sub>D</sub> = I<sub>DSS</sub>(1 − V<sub>GS</sub>/V<sub>T</sub>)².</p><p>• <b>Autopolarizare</b> cu R<sub>S</sub> (V<sub>S</sub> = I<sub>D</sub>R<sub>S</sub>) ⇒ ecuație de gradul 2 (cardul următor).</p><p><b>3.</b> Calculezi potențialele: V<sub>D</sub> = V<sub>DD</sub> − I<sub>D</sub>R<sub>D</sub>, V<sub>S</sub>, apoi V<sub>DS</sub>.</p><p class="w"><b>4. Verifică:</b> V<sub>T</sub> &lt; V<sub>GS</sub> ≤ 0 (canal n) și |V<sub>DS</sub>| ≥ |V<sub>GS</sub> − V<sub>T</sub>|. Verifică și I<sub>Z</sub> ≥ I<sub>Z,min</sub> la Zener-e.</p></section><section class="card"><h3>Autopolarizare: ecuația de gradul 2</h3><p>Cu V<sub>GS</sub> = V<sub>G</sub> − I<sub>D</sub>R<sub>S</sub> (des V<sub>G</sub> = 0) înlocuiești I<sub>D</sub> = (V<sub>G</sub> − V<sub>GS</sub>)/R<sub>S</sub>:</p><div class="f"><span class="fr"><span>V<sub>G</sub> − V<sub>GS</sub></span><span>R<sub>S</sub></span></span> = I<sub>DSS</sub>(1 − <span class="fr"><span>V<sub>GS</sub></span><span>V<sub>T</sub></span></span>)²</div><p>Desfaci pătratul ⇒ aV<sub>GS</sub>² + bV<sub>GS</sub> + c = 0 ⇒ două rădăcini.</p><p class="r">Păstrezi rădăcina cu V<sub>T</sub> &lt; V<sub>GS</sub> ≤ 0 (canal n). Cealaltă e sub V<sub>T</sub> = fizic imposibilă</p><p>Truc: dacă iese „frumos” (−1 V), verifici direct: I<sub>D</sub> = −V<sub>GS</sub>/R<sub>S</sub> = I<sub>DSS</sub>(1 − V<sub>GS</sub>/V<sub>T</sub>)².</p></section><section class="card"><h3>Mai mulți tranzistori</h3><p>Fiecare TEC cu V<sub>GS</sub> cunoscut = <b>sursă de curent</b>. Scrii TKI în nodul comun:</p><div class="f">I<sub>Q1</sub> = I<sub>Q2</sub> + I<sub>R</sub><i class="g"></i>⇒<i class="g"></i>V<sub>nod</sub> = I<sub>R</sub>·R</div><p>Canal p: sursa e la potențialul mai mare, curentul curge S → D. Folosești aceleași formule, cu V<sub>T</sub> &gt; 0 și 0 ≤ V<sub>GS</sub> &lt; V<sub>T</sub>.</p></section><section class="card"><h3>Întrebări „teoretice” de calcul cu TEC-J</h3><p><b>I<sub>D</sub> pentru V<sub>GS</sub>, V<sub>DS</sub> date:</b> V<sub>GS</sub> dincolo de V<sub>T</sub> ⇒ 0. |V<sub>DS</sub>| ≥ |V<sub>GS</sub> − V<sub>T</sub>| ⇒ formula de saturație. Altfel ⇒ triodă:</p><div class="f">I<sub>D</sub> = I<sub>DSS</sub>[2(1 − <span class="fr"><span>V<sub>GS</sub></span><span>V<sub>T</sub></span></span>)<span class="fr"><span>|V<sub>DS</sub>|</span><span>|V<sub>T</sub>|</span></span> − (<span class="fr"><span>V<sub>DS</sub></span><span>V<sub>T</sub></span></span>)²]</div><p><b>V<sub>DS</sub> = 0</b> ⇒ I<sub>D</sub> = 0. <b>Rezistor</b> (V<sub>GS</sub> = 0, V<sub>DS</sub> mic): R ≈ |V<sub>T</sub>|/(2I<sub>DSS</sub>).</p><p><b>Din g<sub>m0</sub>:</b> I<sub>DSS</sub> = g<sub>m0</sub>|V<sub>T</sub>|/2. <b>Din r<sub>ds</sub>:</b> λ = 1/(r<sub>ds</sub>I<sub>D</sub>).</p><p><b>Scalare:</b> g<sub>m</sub> ∝ √<span class="sq">I<sub>D</sub></span>; r<sub>ds</sub> ∝ 1/I<sub>D</sub>. Amplificare intrinsecă μ = g<sub>m</sub>r<sub>ds</sub>.</p></section></div><div class="sub" id="sub-mtca"><section class="card"><h3>Model de semnal mic și parametri</h3><p>Între D și S: sursa g<sub>m</sub>v<sub>gs</sub> (curent D → S) ∥ r<sub>ds</sub>. Poarta e în gol (i<sub>g</sub> = 0).</p><div class="f">g<sub>m</sub> = <span class="fr"><span>2I<sub>DSS</sub></span><span>|V<sub>T</sub>|</span></span>(1 − <span class="fr"><span>V<sub>GS</sub></span><span>V<sub>T</sub></span></span>) = <span class="fr"><span>2√<span class="sq">I<sub>DSS</sub>I<sub>D</sub></span></span><span>|V<sub>T</sub>|</span></span></div><div class="f">r<sub>ds</sub> = <span class="fr"><span>1</span><span>λI<sub>D</sub></span></span><i class="g"></i>(r<sub>o</sub> = ∞ ⇒ λ = 0)</div><p class="w">Tranzistor cu <b>v<sub>gs</sub> = 0 în c.a.</b> (G și S la masă de c.a. sau legate) ⇒ rămâne doar r<sub>ds</sub>: gol dacă r<sub>ds</sub> = ∞.</p></section><section class="card"><h3>Recunoaște etajul (unde intră v<sub>i</sub>, unde iese v<sub>o</sub>)</h3><p><b>SC</b> (sursă comună): v<sub>i</sub> pe G, S la masă (sau R<sub>S</sub> decuplată), ieșire în D ⇒ A<sub>v</sub> &lt; 0.</p><p><b>DC</b> (repetor): v<sub>i</sub> pe G, ieșire din S ⇒ 0 &lt; A<sub>v</sub> &lt; 1.</p><p><b>GC</b> (grilă comună): G la masă de c.a., v<sub>i</sub> în S, ieșire în D ⇒ A<sub>v</sub> &gt; 0, R<sub>i</sub> mic.</p><p><b>v<sub>i</sub> între G și S:</b> v<sub>gs</sub> = v<sub>i</sub> direct ⇒ A<sub>v</sub> = ±g<sub>m</sub>R<sub>sarcină</sub>.</p><p>Apoi aplici tabelul cu etaje (De memorat).</p></section><section class="card"><h3>Metoda generală (dacă nu recunoști etajul)</h3><p><b>1.</b> Desenezi schema de c.a. cu modelul g<sub>m</sub>v<sub>gs</sub> ∥ r<sub>ds</sub>.</p><p><b>2.</b> Scrii v<sub>gs</sub> = v<sub>G</sub> − v<sub>S</sub> în funcție de v<sub>i</sub>, v<sub>o</sub>.</p><p><b>3.</b> TKI în nodul de ieșire (și în S, dacă nu e la masă).</p><p><b>4.</b> A<sub>v</sub> = v<sub>o</sub>/v<sub>i</sub>.</p><p><b>R<sub>i</sub>:</b> pui v<sub>i</sub>, afli i<sub>i</sub> (în poartă i = 0 ⇒ contează doar rezistențele din poartă).</p><p><b>R<sub>o</sub>:</b> v<sub>i</sub> = 0, pui o sursă de test v<sub>t</sub> la ieșire (fără R<sub>L</sub>), R<sub>o</sub> = v<sub>t</sub>/i<sub>t</sub>.</p><div class="f">R<sub>o, drenă</sub> = r<sub>ds</sub>(1 + g<sub>m</sub>R<sub>S</sub>) + R<sub>S</sub><i class="g"></i>(cu R<sub>S</sub> nedecuplată)</div></section><section class="card"><h3>A<sub>vg</sub>, A<sub>i</sub></h3><div class="f">A<sub>vg</sub> = A<sub>v</sub>·<span class="fr"><span>R<sub>i</sub></span><span>R<sub>i</sub> + R<sub>g</sub></span></span><i class="g"></i>A<sub>i</sub> = A<sub>v</sub>·<span class="fr"><span>R<sub>i</sub></span><span>R<sub>L</sub></span></span></div></section></div><div class="sub" id="sub-msemi"><section class="card"><h3>Nivel Fermi și degenerare</h3><p><b>1.</b> Concentrația netă: tip n ⇒ n<sub>0</sub> = N<sub>D</sub> − N<sub>A</sub>; tip p ⇒ p<sub>0</sub> = N<sub>A</sub> − N<sub>D</sub>. Minoritarii: n<sub>i</sub>²/majoritari.</p><p><b>2.</b> Față de E<sub>i</sub>:</p><div class="f">E<sub>F</sub> − E<sub>i</sub> = kT·ln<span class="fr"><span>n<sub>0</sub></span><span>n<sub>i</sub></span></span><i class="g"></i>(n)<i class="g"></i>E<sub>i</sub> − E<sub>F</sub> = kT·ln<span class="fr"><span>p<sub>0</sub></span><span>n<sub>i</sub></span></span><i class="g"></i>(p)</div><p><b>3.</b> Față de bandă:</p><div class="f">E<sub>C</sub> − E<sub>F</sub> = kT·ln<span class="fr"><span>N<sub>C</sub></span><span>n<sub>0</sub></span></span><i class="g"></i>E<sub>F</sub> − E<sub>V</sub> = kT·ln<span class="fr"><span>N<sub>V</sub></span><span>p<sub>0</sub></span></span></div><p class="w"><b>4.</b> Distanța până la bandă &lt; 3kT ≈ 0,078 eV ⇒ degenerat.</p></section><section class="card"><h3>Bară cu rezistivitate ρ și lungime L</h3><div class="f">n<sub>0</sub> = <span class="fr"><span>1</span><span>qμ<sub>n</sub>ρ</span></span><i class="g"></i>(n)<i class="g"></i>p<sub>0</sub> = <span class="fr"><span>1</span><span>qμ<sub>p</sub>ρ</span></span><i class="g"></i>(p)</div><p>E<sub>F</sub>: ca mai sus. La echilibru: <b>J = 0</b>.</p><div class="f">J = σE = <span class="fr"><span>U</span><span>ρL</span></span></div><p>Contează doar <b>driftul majoritarilor</b>; difuzia e 0 (dopare uniformă), minoritarii sunt neglijabili.</p></section><section class="card"><h3>Tabel diodă / Zener și PSF-uri</h3><p>Curent constant de ordinul nA ⇒ <b>I<sub>0</sub></b> (blocare). Tensiunea la care curentul sare la mA ⇒ <b>V<sub>Z</sub> / V<sub>BR</sub></b>.</p><p>Zona unui PSF: I &gt; 0, V ≈ 0,6–0,8 ⇒ direct · I = −nA ⇒ invers · I = −mA la V<sub>BR</sub> ⇒ străpungere.</p><p class="w"><b>Imposibil:</b> |V| &gt; V<sub>BR</sub> sau |V·I| &gt; P<sub>d,max</sub>.</p><div class="f">Test de străpungere: I<sub>max</sub> = <span class="fr"><span>P<sub>max</sub></span><span>V<sub>BR</sub></span></span><i class="g"></i>⇒<i class="g"></i>R ≥ <span class="fr"><span>E − V<sub>BR</sub></span><span>I<sub>max</sub></span></span></div></section></div><div class="sub" id="sub-mex"><section class="card"><h3>P1 diode, Set D-25-01 — aplicat</h3><p><b>Nodul A (D<sub>1,2,3</sub> „SAU”):</b> cea mai mare sursă e E<sub>3</sub> = 12 V ⇒ conduce D<sub>3</sub>; D<sub>1</sub>, D<sub>2</sub> sunt invers.</p><p><b>Zener:</b> I<sub>R1</sub> = (12 − V<sub>D3</sub> − 8)/1 k ≈ 3,36 mA ≥ 1 mA ✓ ⇒ V<sub>B</sub> = 8 V.</p><p><b>Sursa I = 10 mA</b> trage curent prin D<sub>5…8</sub>: V<sub>D</sub> = 50 mV·ln(10<sup>6</sup>) = 0,69 V ⇒ V<sub>C</sub> = −2,76 V ⇒ D<sub>4</sub> e invers ⇒ blocată.</p><p class="r">c.a.: v<sub>i</sub> ajunge prin D<sub>Z1</sub> (fir) și C<sub>∞</sub> pe teanc ⇒ ieșire sus: v<sub>o</sub>/v<sub>i</sub> = 1. Ieșire la mijloc (setul 2): 2/4 = 0,5</p></section><section class="card"><h3>P2 TEC-J (ambele seturi) — aplicat</h3><p><b>Q<sub>1</sub>:</b> G la masă, S la v<sub>i</sub> (0 în c.c.) ⇒ V<sub>GS</sub> = 0 ⇒ I<sub>D1</sub> = I<sub>DSS</sub> = 4 mA.</p><p><b>Q<sub>2</sub>:</b> V<sub>G</sub> = 0 (R<sub>1</sub> fără curent), V<sub>S</sub> = 0,6 V (D<sub>1</sub>) ⇒ V<sub>GS</sub> = −0,6 V ⇒ I<sub>D2</sub> = 4(1 − 0,5)² = 1 mA.</p><p><b>Nodul de drenă:</b> prin R<sub>2</sub> trec 5 mA ⇒ V<sub>D</sub> = 10 − 5 = 5 V. Verificare: V<sub>DS1</sub> = 5 ≥ 1,2 ✓, V<sub>DS2</sub> = 4,4 ≥ 0,6 ✓.</p><p><b>c.a.:</b> Q<sub>2</sub> are v<sub>gs</sub> = 0 și r<sub>o</sub> = ∞ ⇒ gol. Q<sub>1</sub>: G la masă, v<sub>i</sub> în S ⇒ <b>GC</b>.</p><p class="r">g<sub>m1</sub> = 2·4/1,2 = 6,67 mS ⇒ A<sub>v</sub> = g<sub>m1</sub>R<sub>2</sub> = 6,67; R<sub>i</sub> = 1/g<sub>m1</sub> = 150 Ω</p></section></div></div><div class="panel" id="tab-p"><nav class="pills" data-tab="p"><button type="button" data-sub="pcst" class="on">Constante</button><button type="button" data-sub="ptab">Tabele</button><button type="button" data-sub="pform">Formule</button><button type="button" data-sub="pcap">Capcane</button></nav><div class="sub on" id="sub-pcst"><section class="card"><h3>Siliciu, 300 K</h3><div class="f">n<sub>i</sub> = 1,5·10<sup>10</sup> cm<sup>-3</sup><i class="g"></i>E<sub>G</sub> = 1,12 eV</div><div class="f">N<sub>C</sub> = 2,8·10<sup>19</sup><i class="g"></i>N<sub>V</sub> = 1,04·10<sup>19</sup> cm<sup>-3</sup></div><div class="f">kT = 0,0259 eV<i class="g"></i>3kT ≈ 0,078 eV</div><div class="f">V<sub>th</sub> = 25 mV<i class="g"></i>mV<sub>th</sub> = 50 mV (m = 2)</div><p>μ<sub>n</sub> = 1350, μ<sub>p</sub> = 480 cm²/Vs · q = 1,6·10<sup>-19</sup> C · E<sub>i</sub> ≈ E<sub>G</sub>/2</p></section><section class="card"><h3>V<sub>D</sub> rapid (m = 2)</h3><div class="tw"><table><tr><th>I<sub>D</sub>/I<sub>0</sub></th><th>V<sub>D</sub></th></tr><tr><td>10<sup>4</sup></td><td>0,46 V</td></tr><tr><td>10<sup>5</sup></td><td>0,58 V</td></tr><tr><td>10<sup>6</sup></td><td>0,69 V</td></tr><tr><td>10<sup>7</sup></td><td>0,81 V</td></tr></table></div><p class="r">Fiecare decadă de curent (×10) adaugă 115 mV (= 50 mV·ln 10)</p></section><section class="card"><h3>Prefixe (capcană în enunțuri)</h3><p>n = 10<sup>-9</sup>, μ = 10<sup>-6</sup>, m = 10<sup>-3</sup>. μ/n = 10<sup>3</sup>.</p><p class="w">I<sub>0</sub> e mereu de ordinul <b>nA</b>, chiar dacă scrie „mA” în notițe.</p></section></div><div class="sub" id="sub-ptab"><section class="card"><h3>Echivalare c.c. → c.a.</h3><div class="tw"><table><tr><th>Element</th><th>c.c.</th><th>c.a.</th></tr><tr><td>Sursă de tensiune</td><td>rămâne</td><td><b>masă</b></td></tr><tr><td>Sursă de curent</td><td>rămâne</td><td><b>gol</b></td></tr><tr><td>C<sub>∞</sub></td><td>gol</td><td><b>fir</b></td></tr><tr><td>Diodă ON</td><td>V<sub>D</sub></td><td>r<sub>d</sub></td></tr><tr><td>Diodă OFF</td><td>−I<sub>0</sub></td><td>gol</td></tr><tr><td>Zener străpuns</td><td>V<sub>Z</sub></td><td><b>fir</b> (R<sub>Z</sub> = 0)</td></tr><tr><td>Zener OFF</td><td>−I<sub>0Z</sub></td><td>gol</td></tr><tr><td>TEC, v<sub>gs</sub> = 0</td><td>I<sub>D</sub></td><td>r<sub>ds</sub> (gol dacă ∞)</td></tr></table></div></section><section class="card"><h3>TEC-J: canal n vs. p</h3><div class="tw"><table><tr><th></th><th>canal n</th><th>canal p</th></tr><tr><td>V<sub>T</sub></td><td>&lt; 0</td><td>&gt; 0</td></tr><tr><td>Conducție</td><td>V<sub>T</sub> &lt; V<sub>GS</sub> ≤ 0</td><td>0 ≤ V<sub>GS</sub> &lt; V<sub>T</sub></td></tr><tr><td>Blocare</td><td>V<sub>GS</sub> ≤ V<sub>T</sub></td><td>V<sub>GS</sub> ≥ V<sub>T</sub></td></tr><tr><td>Saturație</td><td>|V<sub>DS</sub>| ≥ |V<sub>GS</sub> − V<sub>T</sub>|</td><td>idem</td></tr><tr><td>Curent</td><td>D → S</td><td>S → D</td></tr></table></div></section><section class="card"><h3>Formule etaje TEC</h3><div class="tw"><table><tr><th>Etaj</th><th>A<sub>v</sub></th><th>R<sub>i</sub></th><th>R<sub>o</sub></th></tr><tr><td><b>SC</b> (R<sub>S</sub> dec.)</td><td>−g<sub>m</sub>(r<sub>ds</sub> ∥ R<sub>D</sub> ∥ R<sub>L</sub>)</td><td>R<sub>G</sub></td><td>r<sub>ds</sub> ∥ R<sub>D</sub></td></tr><tr><td><b>SC</b> (R<sub>S</sub> nedec.)</td><td>−<span class="fr"><span>g<sub>m</sub>(R<sub>D</sub> ∥ R<sub>L</sub>)</span><span>1+g<sub>m</sub>R<sub>S</sub></span></span></td><td>R<sub>G</sub></td><td>R<sub>D</sub></td></tr><tr><td><b>DC</b> (repetor)</td><td><span class="fr"><span>g<sub>m</sub>R<sub>e</sub></span><span>1+g<sub>m</sub>R<sub>e</sub></span></span></td><td>R<sub>G</sub></td><td>R<sub>S</sub> ∥ r<sub>ds</sub> ∥ <span class="fr"><span>1</span><span>g<sub>m</sub></span></span></td></tr><tr><td><b>GC</b></td><td>+g<sub>m</sub>(R<sub>D</sub> ∥ R<sub>L</sub>)</td><td>R<sub>S</sub> ∥ <span class="fr"><span>1</span><span>g<sub>m</sub></span></span></td><td>R<sub>D</sub></td></tr></table></div><div class="f">R<sub>e</sub> = r<sub>ds</sub> ∥ R<sub>S</sub> ∥ R<sub>L</sub></div></section><section class="card"><h3>pn vs. Schottky</h3><div class="tw"><table><tr><th></th><th>pn</th><th>Schottky</th></tr><tr><td>Structură</td><td>joncțiune p–n</td><td>metal–semic.</td></tr><tr><td>Purtători</td><td>e⁻ + goluri</td><td>majoritari</td></tr><tr><td>Prag</td><td>≈ 0,6–0,7 V</td><td>≈ 0,2–0,3 V</td></tr><tr><td>Viteză</td><td>lentă (C<sub>d</sub>)</td><td>rapidă</td></tr><tr><td>Redresează</td><td>da</td><td>da</td></tr></table></div></section></div><div class="sub" id="sub-pform"><section class="card"><h3>Dioda</h3><div class="f">I<sub>D</sub> = I<sub>0</sub>[e<sup>V<sub>D</sub>/mV<sub>th</sub></sup> − 1]<i class="g"></i>V<sub>D</sub> = mV<sub>th</sub>·ln<span class="fr"><span>I<sub>D</sub></span><span>I<sub>0</sub></span></span></div><div class="f">r<sub>d</sub> = <span class="fr"><span>mV<sub>th</sub></span><span>I<sub>D</sub></span></span></div></section><section class="card"><h3>TEC-J</h3><div class="f">I<sub>D</sub> = I<sub>DSS</sub>(1 − <span class="fr"><span>V<sub>GS</sub></span><span>V<sub>T</sub></span></span>)²(1 + λ|V<sub>DS</sub>|)</div><div class="f">g<sub>m</sub> = <span class="fr"><span>2I<sub>DSS</sub></span><span>|V<sub>T</sub>|</span></span>(1 − <span class="fr"><span>V<sub>GS</sub></span><span>V<sub>T</sub></span></span>) = <span class="fr"><span>2√<span class="sq">I<sub>DSS</sub>I<sub>D</sub></span></span><span>|V<sub>T</sub>|</span></span></div><div class="f">g<sub>m0</sub> = <span class="fr"><span>2I<sub>DSS</sub></span><span>|V<sub>T</sub>|</span></span><i class="g"></i>r<sub>ds</sub> = <span class="fr"><span>1</span><span>λI<sub>D</sub></span></span><i class="g"></i>μ = g<sub>m</sub>r<sub>ds</sub></div><div class="f">V<sub>DS,sat</sub> = |V<sub>GS</sub> − V<sub>T</sub>|</div></section><section class="card"><h3>MOS cu canal indus (dacă apare)</h3><div class="f">I<sub>D</sub> = <span class="fr"><span>k'</span><span>2</span></span>·<span class="fr"><span>W</span><span>L</span></span>(V<sub>GS</sub> − V<sub>T</sub>)²<i class="g"></i>g<sub>m</sub> = <span class="fr"><span>2I<sub>D</sub></span><span>V<sub>GS</sub> − V<sub>T</sub></span></span></div></section><section class="card"><h3>Semiconductor</h3><div class="f">n·p = n<sub>i</sub>²<i class="g"></i>σ = q(μ<sub>n</sub>n + μ<sub>p</sub>p)<i class="g"></i>ρ = 1/σ</div><div class="f">x<sub>p</sub>N<sub>A</sub> = x<sub>n</sub>N<sub>D</sub><i class="g"></i>Φ<sub>0</sub> = V<sub>th</sub>·ln<span class="fr"><span>N<sub>A</sub>N<sub>D</sub></span><span>n<sub>i</sub>²</span></span></div></section></div><div class="sub" id="sub-pcap"><section class="card"><h3>Verifică înainte să predai</h3><p class="w">Zener: I<sub>Z</sub> ≥ I<sub>Z,min</sub>? Dacă nu, Zener-ul e <b>blocat</b> și reiei calculul.</p><p class="w">Diode „SAU”: conduce doar una. Celelalte sunt invers.</p><p class="w">TEC: alegi rădăcina cu V<sub>T</sub> &lt; V<sub>GS</sub> ≤ 0; verifici |V<sub>DS</sub>| ≥ |V<sub>GS</sub> − V<sub>T</sub>|.</p><p class="w">I<sub>G</sub> = 0 ⇒ rezistența din poartă <b>nu are cădere</b> în c.c.</p><p class="w">GC: A<sub>v</sub> &gt; 0 și R<sub>i</sub> = 1/g<sub>m</sub> (nu ∞!).</p><p class="w">Repetor: v<sub>i</sub> = v<sub>gs</sub> + v<sub>o</sub>; R<sub>o</sub> = R<sub>S</sub> ∥ r<sub>ds</sub> ∥ 1/g<sub>m</sub>.</p><p class="w">A<sub>i</sub> se calculează cu R<sub>L</sub>, nu cu R<sub>o</sub>.</p><p class="w">v<sub>o</sub>/v<sub>g</sub> = 0 dacă semnalul trece printr-o diodă blocată sau dacă nodul e fixat de un Zener.</p><p class="w">Sursa de curent e <b>gol</b> în c.a.; C<sub>∞</sub> e <b>fir</b>; V<sub>DD</sub> e <b>masă</b>.</p></section></div></div>
+</div></main>
+<button id="up" type="button" aria-label="Sus">↑</button>
+<script>
+(function(){
+var scr=document.getElementById('scr'),q=document.getElementById('q'),sw=document.getElementById('sw'),
+    res=document.getElementById('res'),rm=document.getElementById('rm'),rl=document.getElementById('rl'),
+    tabs=document.querySelectorAll('.tabs button'),cur='t';
+function get(k){try{return localStorage.getItem('de_'+k)}catch(e){return null}}
+function put(k,v){try{localStorage.setItem('de_'+k,v)}catch(e){}}
+
+function showTab(t){
+  cur=t;put('tab',t);
+  tabs.forEach(function(b){b.classList.toggle('on',b.dataset.t===t)});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('on',p.id==='tab-'+t)});
+}
+function showSub(t,s){
+  var nav=document.querySelector('.pills[data-tab="'+t+'"]');if(!nav)return;
+  nav.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.sub===s)});
+  document.getElementById('tab-'+t).querySelectorAll('.sub').forEach(function(d){d.classList.toggle('on',d.id==='sub-'+s)});
+  put('sub_'+t,s);
+}
+tabs.forEach(function(b){b.addEventListener('click',function(){clearQ();showTab(b.dataset.t);scr.scrollTop=0})});
+document.querySelectorAll('.pills').forEach(function(nav){
+  nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;showSub(nav.dataset.tab,b.dataset.sub);scr.scrollTop=0});
+});
+
+/* o singură problemă deschisă odată, ca să nu se lungească pagina */
+document.addEventListener('toggle',function(e){
+  var d=e.target;if(!d.classList||!d.classList.contains('pb')||!d.open)return;
+  d.parentNode.querySelectorAll('.pb[open]').forEach(function(o){if(o!==d)o.open=false});
+  setTimeout(function(){d.scrollIntoView({block:'nearest'})},30);
+},true);
+
+/* căutare */
+function norm(s){return(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
+var items=[].slice.call(document.querySelectorAll('.panel .card,.panel .pb'));
+function clearQ(){q.value='';sw.classList.remove('has');res.classList.remove('on');rl.innerHTML='';
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('on',p.id==='tab-'+cur)})}
+function jump(n){
+  var d=document.getElementById('P'+n);if(!d)return false;
+  clearQ();showTab('p');showSub('p',d.parentNode.id.slice(4));d.open=true;
+  setTimeout(function(){d.scrollIntoView({block:'start'})},30);return true;
+}
+q.addEventListener('input',function(){
+  var raw=q.value.trim();sw.classList.toggle('has',!!raw);
+  if(!raw){clearQ();return}
+  var m=raw.match(/^p?\s*(\d{1,2})$/i);
+  if(m&&document.getElementById('P'+m[1])){
+    rm.textContent='Apasă Enter pentru P'+m[1];
+  }
+  var s=norm(raw),hits=items.filter(function(c){return norm(c.textContent).indexOf(s)>-1});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  res.classList.add('on');rl.innerHTML='';
+  if(!(m&&document.getElementById('P'+m[1])))rm.textContent=hits.length?hits.length+' rezultate':'Niciun rezultat';
+  hits.slice(0,30).forEach(function(c){var k=c.cloneNode(true);k.removeAttribute('id');k.open=false;rl.appendChild(k)});
+  scr.scrollTop=0;
+});
+q.addEventListener('keydown',function(e){
+  if(e.key!=='Enter')return;var m=q.value.trim().match(/^p?\s*(\d{1,2})$/i);
+  if(m&&jump(m[1])){q.blur();e.preventDefault()}
+});
+document.getElementById('qc').addEventListener('click',function(){clearQ();q.focus()});
+
+/* font */
+var fs=parseFloat(get('fs'))||15;
+function setFs(v){fs=Math.min(21,Math.max(11,v));document.documentElement.style.setProperty('--fs',fs+'px');put('fs',fs)}
+setFs(fs);
+document.getElementById('fm').addEventListener('click',function(){setFs(fs-1)});
+document.getElementById('fp').addEventListener('click',function(){setFs(fs+1)});
+
+/* sus + ramă rotativă */
+var up=document.getElementById('up');
+scr.addEventListener('scroll',function(){up.classList.toggle('on',scr.scrollTop>150)},{passive:true});
+up.addEventListener('click',function(){scr.scrollTo({top:0,behavior:'smooth'})});
+window.addEventListener('wheel',function(e){if(!scr.contains(e.target))scr.scrollBy(0,e.deltaY)},{passive:true});
+document.getElementById('mode').addEventListener('click',function(){
+  var f=document.body.classList.toggle('full');this.textContent=f?'Mod ceas':'Ecran complet'});
+
+/* starea salvată */
+['t','m','p'].forEach(function(t){var s=get('sub_'+t);if(s&&document.getElementById('sub-'+s))showSub(t,s)});
+var t0=get('tab');if(t0&&document.getElementById('tab-'+t0))showTab(t0);
+})();
+</script>
 </body>
 </html>
